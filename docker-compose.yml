@@ -1,0 +1,27 @@
+# Production-shaped local stack: Postgres + API + Web.
+# (For zero-setup development you don't need this: `npm run dev:api` uses embedded Postgres.)
+services:
+  db:
+    image: postgres:17
+    environment: { POSTGRES_USER: aidev, POSTGRES_PASSWORD: aidev, POSTGRES_DB: aidev }
+    volumes: [dbdata:/var/lib/postgresql/data]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U aidev"], interval: 3s, retries: 20 }
+    ports: ["5432:5432"]
+  api:
+    build: { context: ., dockerfile: apps/api/Dockerfile }
+    environment:
+      DATABASE_URL: postgres://aidev:aidev@db:5432/aidev
+      AIDEV_STORAGE_DIR: /data/storage
+      PORT: 4000
+    volumes: [artifacts:/data/storage]
+    depends_on: { db: { condition: service_healthy } }
+    ports: ["4000:4000"]
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args: { NEXT_PUBLIC_API_URL: http://localhost:4000 }
+    environment: { API_URL: http://api:4000 }
+    depends_on: [api]
+    ports: ["3000:3000"]
+volumes: { dbdata: {}, artifacts: {} }

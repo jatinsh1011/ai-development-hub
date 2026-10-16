@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "license": "MIT",
+  "name": "sentry",
+  "type": "mcp",
+  "description": "Query Sentry issues, events and releases over Sentry’s hosted MCP server.",
+  "tags": [
+    "sentry",
+    "errors",
+    "observability",
+    "monitoring"
+  ],
+  "categories": [
+    "observability"
+  ],
+  "permissions": [
+    "network"
+  ],
+  "mcp": {
+    "transport": "http",
+    "url": "https://mcp.sentry.dev/mcp"
+  },
+  "author": "Aidev Official",
+  "title": "Sentry"
+}

@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "license": "MIT",
+  "name": "pr-review",
+  "type": "prompt",
+  "description": "Review the current pull request for correctness, tests, naming and risk.",
+  "tags": [
+    "review",
+    "pull-request",
+    "code-review"
+  ],
+  "categories": [
+    "review"
+  ],
+  "permissions": [
+    "read-files",
+    "git"
+  ],
+  "author": "Aidev Official",
+  "title": "PR Review"
+}

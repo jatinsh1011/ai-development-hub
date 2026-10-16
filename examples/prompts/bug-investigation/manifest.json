@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "license": "MIT",
+  "name": "bug-investigation",
+  "type": "prompt",
+  "description": "Systematically reproduce, isolate and explain a bug before proposing a fix.",
+  "tags": [
+    "debugging",
+    "bug",
+    "investigation"
+  ],
+  "categories": [
+    "debugging"
+  ],
+  "permissions": [
+    "read-files",
+    "run-tests"
+  ],
+  "author": "Aidev Official"
+}

@@ -1,0 +1,35 @@
+{
+  "version": "1.1.0",
+  "license": "MIT",
+  "name": "security-review-agent",
+  "type": "agent",
+  "description": "Reviews diffs for injection, authz gaps, secrets and unsafe dependencies, with severity-ranked findings.",
+  "tags": [
+    "security",
+    "review",
+    "owasp",
+    "appsec"
+  ],
+  "categories": [
+    "security"
+  ],
+  "languages": [],
+  "frameworks": [],
+  "permissions": [
+    "read-files",
+    "git"
+  ],
+  "agent": {
+    "tools": [
+      "read",
+      "search"
+    ]
+  },
+  "dependencies": {
+    "mcps": [
+      "github",
+      "sentry"
+    ]
+  },
+  "author": "Aidev Official"
+}

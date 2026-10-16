@@ -1,0 +1,38 @@
+{
+  "version": "1.2.0",
+  "license": "MIT",
+  "name": "github",
+  "type": "mcp",
+  "description": "Read repositories, issues and pull requests, and create comments, through GitHub.",
+  "tags": [
+    "github",
+    "git",
+    "pull-requests",
+    "issues"
+  ],
+  "categories": [
+    "source-control"
+  ],
+  "permissions": [
+    "network",
+    "env-vars",
+    "git"
+  ],
+  "mcp": {
+    "transport": "stdio",
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-github"
+    ],
+    "env": {
+      "GITHUB_PERSONAL_ACCESS_TOKEN": {
+        "description": "GitHub PAT with repo scope",
+        "required": true,
+        "secret": true
+      }
+    }
+  },
+  "author": "Aidev Official",
+  "title": "GitHub"
+}

@@ -1,0 +1,28 @@
+{
+  "name": "ai-development-hub",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "vitest run",
+    "dev:api": "npm run dev -w @aidev/api",
+    "import": "npm run import -w @aidev/api --",
+    "dev:web": "npm run dev -w @aidev/web",
+    "build:cli": "npm run build -w aidev",
+    "lint": "eslint .",
+    "check": "npm run lint && npm run typecheck && npm test"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.0.0",
+    "eslint": "^10.12.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "typescript-eslint": "^8.71.0",
+    "vitest": "^3.2.0"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "version": "1.4.2",
+  "license": "MIT",
+  "name": "react-migration-agent",
+  "type": "agent",
+  "title": "React Migration Agent",
+  "description": "Migrates React 17/18 applications to React 19 with dependency analysis, codemods and test generation.",
+  "tags": [
+    "react",
+    "migration",
+    "react-19",
+    "codemod",
+    "react-migration"
+  ],
+  "categories": [
+    "migration"
+  ],
+  "languages": [
+    "typescript",
+    "javascript"
+  ],
+  "frameworks": [
+    "react"
+  ],
+  "permissions": [
+    "read-files",
+    "write-files",
+    "run-tests",
+    "run-commands",
+    "git"
+  ],
+  "agent": {
+    "tools": [
+      "read",
+      "edit",
+      "search",
+      "execute"
+    ]
+  },
+  "dependencies": {
+    "skills": [
+      "react-19-migration",
+      "rtl-migration"
+    ],
+    "mcps": [
+      "github"
+    ]
+  },
+  "author": "Aidev Official"
+}

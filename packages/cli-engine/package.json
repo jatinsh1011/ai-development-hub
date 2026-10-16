@@ -1,0 +1,10 @@
+{
+  "name": "@aidev/cli-engine",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": { "typecheck": "tsc -p tsconfig.json" },
+  "dependencies": { "@aidev/artifact-schema": "*", "@aidev/provider-adapters": "*", "diff": "^8.0.0" }
+}

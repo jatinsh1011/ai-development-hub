@@ -1,0 +1,22 @@
+{
+  "name": "aidev",
+  "version": "0.1.0",
+  "description": "Install reusable AI development building blocks (agents, skills, MCP servers, prompts) into Copilot, Claude Code and Codex.",
+  "type": "module",
+  "bin": { "aidev": "dist/aidev.js" },
+  "files": ["dist"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "tsx src/main.ts",
+    "build": "tsup",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@aidev/artifact-schema": "*",
+    "@aidev/cli-engine": "*",
+    "@aidev/provider-adapters": "*",
+    "commander": "^14.0.0",
+    "tsup": "^8.5.0"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "version": "1.1.0",
+  "license": "MIT",
+  "name": "frontend-toolkit",
+  "type": "plugin",
+  "description": "React migration agent, testing skills and the GitHub MCP in one install.",
+  "tags": [
+    "react",
+    "frontend",
+    "toolkit",
+    "bundle"
+  ],
+  "categories": [
+    "bundle"
+  ],
+  "languages": [
+    "typescript"
+  ],
+  "frameworks": [
+    "react"
+  ],
+  "permissions": [
+    "read-files",
+    "write-files"
+  ],
+  "dependencies": {
+    "agents": [
+      "react-migration-agent"
+    ],
+    "skills": [
+      "rtl-migration",
+      "mui7-migration"
+    ],
+    "mcps": [
+      "github"
+    ],
+    "prompts": [
+      "pr-review"
+    ]
+  },
+  "author": "Aidev Official"
+}

@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "license": "MIT",
+  "name": "rtl-migration",
+  "type": "skill",
+  "description": "Migrate Enzyme tests to React Testing Library with user-centric queries and async patterns.",
+  "tags": [
+    "react",
+    "testing",
+    "rtl",
+    "enzyme",
+    "migration"
+  ],
+  "categories": [
+    "testing",
+    "migration"
+  ],
+  "languages": [
+    "typescript",
+    "javascript"
+  ],
+  "frameworks": [
+    "react",
+    "jest"
+  ],
+  "permissions": [
+    "read-files",
+    "write-files",
+    "run-tests"
+  ],
+  "author": "Aidev Official",
+  "title": "RTL Migration"
+}

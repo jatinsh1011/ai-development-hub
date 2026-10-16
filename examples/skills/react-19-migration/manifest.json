@@ -1,0 +1,32 @@
+{
+  "version": "1.3.0",
+  "license": "MIT",
+  "name": "react-19-migration",
+  "type": "skill",
+  "description": "Step-by-step playbook for upgrading React 17/18 apps to React 19: removed APIs, codemods and verification.",
+  "tags": [
+    "react",
+    "migration",
+    "react-19",
+    "upgrade",
+    "codemod"
+  ],
+  "categories": [
+    "migration"
+  ],
+  "languages": [
+    "typescript",
+    "javascript"
+  ],
+  "frameworks": [
+    "react"
+  ],
+  "permissions": [
+    "read-files",
+    "write-files",
+    "run-tests",
+    "run-commands"
+  ],
+  "author": "Aidev Official",
+  "title": "React 19 Migration"
+}
