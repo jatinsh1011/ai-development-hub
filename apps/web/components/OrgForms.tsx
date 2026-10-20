@@ -181,15 +181,15 @@ export function TokenManager({ tokens }: { tokens: { id: string; name: string; k
         <Msg m={msg} />
       </form>
       {fresh && (
-        <div className="rounded-xl border border-ok/40 bg-ok/5 p-4">
+        <div className="callout callout-ok">
           <p className="mb-2 text-sm font-medium">Copy this token now — it is shown once.</p>
-          <code className="block break-all rounded-lg bg-code p-3 font-mono text-xs">{fresh}</code>
+          <code className="block break-all rounded-xl bg-surface p-3 font-mono text-xs text-fg">{fresh}</code>
           <p className="mt-2 text-xs text-muted">
             Use it as <span className="font-mono">AIDEV_TOKEN</span> or <span className="font-mono">aidev login --token</span>.
           </p>
         </div>
       )}
-      <ul className="divide-y divide-border rounded-xl border border-border text-sm">
+      <ul className="card divide-y divide-border text-sm">
         {tokens.map((t) => (
           <li key={t.id} className="flex justify-between px-4 py-3">
             <span>

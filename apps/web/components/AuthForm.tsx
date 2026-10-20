@@ -22,7 +22,7 @@ export function AuthForm({ mode }: { mode: 'login' | 'register' }) {
         setBusy(false);
         if (r.status >= 400 || r.status === 0) return setErr(r.data.error ?? 'Something went wrong');
         setToken(r.data.token);
-        router.push('/');
+        router.push('/explore');
         router.refresh();
       }}
     >
@@ -51,27 +51,27 @@ export function AuthForm({ mode }: { mode: 'login' | 'register' }) {
           {err}
         </p>
       )}
-      <Button className="h-10 w-full" disabled={busy}>
+      <Button className="btn-lg w-full" disabled={busy}>
         {busy ? '…' : reg ? 'Create account' : 'Log in'}
       </Button>
       <p className="text-center text-sm text-muted">
         {reg ? (
           <>
             Already have an account?{' '}
-            <Link href="/login" className="text-fg underline underline-offset-4">
+            <Link href="/login" className="link font-semibold">
               Log in
             </Link>
           </>
         ) : (
           <>
             New here?{' '}
-            <Link href="/register" className="text-fg underline underline-offset-4">
+            <Link href="/register" className="link font-semibold">
               Create an account
             </Link>
           </>
         )}
       </p>
-      <div className="rounded-lg border border-dashed border-strong p-3 text-center text-xs text-muted">
+      <div className="callout callout-note text-center text-xs">
         GitHub sign-in is on the roadmap. The account model already supports it.
       </div>
     </form>

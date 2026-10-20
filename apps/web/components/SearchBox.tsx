@@ -19,10 +19,10 @@ export function SearchBox({ initial = '', large = false, autoFocus = false }: { 
       <input
         ref={ref} autoFocus={autoFocus} value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search the Hub"
         placeholder="Search agents, skills, MCPs, prompts…"
-        className={`w-full rounded-xl border border-strong bg-bg placeholder:text-muted/70 focus:border-fg focus:outline-none ${large ? 'h-14 pl-13 pr-16 text-lg' : 'h-10 pl-10 pr-10 text-sm'}`}
+        className={`field ${large ? 'search-field pl-13 pr-16' : 'h-11 rounded-full pl-10 pr-10 text-sm'}`}
         style={large ? { paddingLeft: 52 } : undefined}
       />
-      <kbd className={`pointer-events-none absolute top-1/2 hidden -translate-y-1/2 rounded-md border border-border px-1.5 font-mono text-xs text-muted sm:block ${large ? 'right-5' : 'right-3'}`}>/</kbd>
+      <kbd className={`pointer-events-none absolute top-1/2 hidden -translate-y-1/2 rounded-md bg-quiet px-2 font-mono text-xs text-fg shadow-[0_2px_var(--quiet-edge)] sm:block ${large ? 'right-5' : 'right-3.5'}`}>/</kbd>
     </form>
   );
 }

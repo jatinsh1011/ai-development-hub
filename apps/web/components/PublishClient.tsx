@@ -54,11 +54,11 @@ export function PublishClient({ me, orgs }: { me: string | null; orgs: Org[] }) 
   }
 
   const errors = report?.issues?.filter((i: any) => i.level === 'error') ?? [];
-  const code = 'rounded bg-code px-1.5 py-0.5 font-mono text-[13px]';
+  const code = 'rounded-md bg-quiet px-1.5 py-0.5 font-mono text-[13px]';
   return (
     <div className="space-y-8">
       {!me && (
-        <div className="rounded-xl border border-warn/40 bg-warn/5 p-4 text-sm">
+        <div className="callout callout-warn">
           <Link href="/login" className="font-medium underline">
             Log in
           </Link>{' '}
@@ -66,9 +66,9 @@ export function PublishClient({ me, orgs }: { me: string | null; orgs: Org[] }) 
         </div>
       )}
 
-      <label className="block cursor-pointer rounded-2xl border border-dashed border-strong p-12 text-center hover:bg-subtle">
+      <label className="block cursor-pointer rounded-3xl border-2 border-dashed border-strong bg-surface/60 p-12 text-center hover:border-link hover:bg-surface">
         <input type="file" className="hidden" multiple onChange={(e) => pick(e.target.files)} {...({ webkitdirectory: '', directory: '' } as Record<string, string>)} />
-        <div className="text-lg font-medium">Choose an artifact directory</div>
+        <div className="h-card text-2xl">Choose an artifact directory</div>
         <div className="mt-1 text-sm text-muted">Contains a manifest.json and its entry file (agent.md, SKILL.md, prompt.md…). Text files only.</div>
         {files.length > 0 && <div className="mt-4 font-mono text-xs text-muted">{files.length} files read</div>}
       </label>
@@ -79,7 +79,7 @@ export function PublishClient({ me, orgs }: { me: string | null; orgs: Org[] }) 
       {report && (
         <div className="space-y-6">
           <div>
-            <h2 className="mb-3 font-semibold">Validation</h2>
+            <h2 className="h-card mb-3 text-xl">Validation</h2>
             {report.issues.length === 0 && <p className="text-sm text-ok">✓ Manifest and files are valid.</p>}
             <ul className="space-y-1.5 text-sm">
               {report.issues.map((i: any, k: number) => (
@@ -93,7 +93,7 @@ export function PublishClient({ me, orgs }: { me: string | null; orgs: Org[] }) 
             </ul>
           </div>
           {report.manifest && (
-            <div className="rounded-xl border border-border p-5">
+            <div className="card p-5">
               <div className="flex items-baseline justify-between">
                 <div className="font-medium">
                   {report.manifest.name} <span className="font-mono text-sm text-muted">@{report.manifest.version}</span>
@@ -114,7 +114,7 @@ export function PublishClient({ me, orgs }: { me: string | null; orgs: Org[] }) 
           )}
           {report.findings?.filter((f: any) => f.severity !== 'info').length > 0 && (
             <div>
-              <h2 className="mb-3 font-semibold">Scan findings</h2>
+              <h2 className="h-card mb-3 text-xl">Scan findings</h2>
               <ul className="space-y-1.5 text-sm">
                 {report.findings
                   .filter((f: any) => f.severity !== 'info')
@@ -132,8 +132,8 @@ export function PublishClient({ me, orgs }: { me: string | null; orgs: Org[] }) 
           )}
 
           {report.ok && me && (
-            <div className="space-y-4 rounded-2xl border border-border p-6">
-              <h2 className="font-semibold">Publish</h2>
+            <div className="card space-y-4 rounded-3xl p-6">
+              <h2 className="h-card text-xl">Publish</h2>
               <div className="grid gap-4 sm:grid-cols-3">
                 <div>
                   <Label>Publish as</Label>

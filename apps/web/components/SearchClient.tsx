@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { ArtifactCard } from './ArtifactCard';
-import { Empty, Select, cx } from './ui';
+import { Empty, Select } from './ui';
 import { clientApi } from '@/lib/client';
 import type { ArtifactSummary } from '@/lib/types';
 
@@ -40,17 +40,17 @@ export function SearchClient({ initial, orgs }: { initial: Filters; orgs: { slug
       <div className="relative">
         <svg className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" strokeLinecap="round" /></svg>
         <input autoFocus value={f.q} onChange={(e) => set('q', e.target.value)} placeholder="Search agents, skills, MCPs, prompts…" aria-label="Search the Hub"
-          className="h-14 w-full rounded-xl border border-strong bg-bg pr-5 text-lg placeholder:text-muted/70 focus:border-fg focus:outline-none" style={{ paddingLeft: 52 }} />
+          className="field search-field pr-5" style={{ paddingLeft: 52 }} />
       </div>
 
-      <div className="mt-5 flex flex-wrap gap-1.5" role="tablist" aria-label="Artifact type">
+      <div className="tabs mt-6" role="tablist" aria-label="Artifact type">
         {TYPE_TABS.map(([id, label]) => (
           <button key={id} role="tab" aria-selected={f.type === id} onClick={() => set('type', id)}
-            className={cx('rounded-full border px-3.5 py-1 text-sm cursor-pointer', f.type === id ? 'border-fg bg-accent text-accent-fg' : 'border-border text-muted hover:border-strong hover:text-fg')}>{label}</button>
+            className="tab">{label}</button>
         ))}
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center gap-2">
+      <div className="mt-5 flex flex-wrap items-center gap-2.5">
         <Select aria-label="Provider" value={f.provider} onChange={(e) => set('provider', e.target.value)}>
           <option value="">Any provider</option><option value="copilot">GitHub Copilot</option><option value="claude">Claude Code</option><option value="codex">Codex</option>
         </Select>
@@ -64,10 +64,10 @@ export function SearchClient({ initial, orgs }: { initial: Filters; orgs: { slug
         </Select>
       </div>
 
-      <p className="mb-4 mt-8 text-sm text-muted" aria-live="polite">{err || (res ? `${res.total} result${res.total === 1 ? '' : 's'}` : 'Searching…')}</p>
+      <p className="label mb-4 mt-8" aria-live="polite">{err || (res ? `${res.total} result${res.total === 1 ? '' : 's'}` : 'Searching…')}</p>
       {res && (res.items.length ? (
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{res.items.map((a) => <ArtifactCard key={a.id} a={a} />)}</div>
-      ) : <Empty>Nothing matches. Try fewer filters, or <a className="underline" href="/publish">publish the building block you need</a>.</Empty>)}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{res.items.map((a) => <ArtifactCard key={a.id} a={a} />)}</div>
+      ) : <Empty>Nothing matches. Try fewer filters, or <a className="link" href="/publish">publish the building block you need</a>.</Empty>)}
     </div>
   );
 }

@@ -14,20 +14,20 @@ export function UserMenu({ user, orgs }: { user: User; orgs: { slug: string; nam
     document.addEventListener('mousedown', close);
     return () => document.removeEventListener('mousedown', close);
   }, []);
-  const item = 'block rounded-md px-3 py-1.5 text-sm hover:bg-subtle';
+  const item = 'menu-item';
   return (
     <div className="relative" ref={ref}>
-      <button onClick={() => setOpen(!open)} className="flex h-9 items-center gap-2 rounded-lg px-2.5 text-sm hover:bg-subtle cursor-pointer" aria-expanded={open}>
-        <span className="grid h-6 w-6 place-items-center rounded-full bg-accent text-[11px] font-semibold text-accent-fg">{user.handle[0].toUpperCase()}</span>
+      <button onClick={() => setOpen(!open)} className="flex h-10 items-center gap-2.5 rounded-full px-2.5 text-sm font-semibold hover:bg-quiet cursor-pointer" aria-expanded={open}>
+        <span className="avatar h-7 w-7 text-[13px]">{user.handle[0].toUpperCase()}</span>
         <span className="hidden sm:inline">{user.handle}</span>
       </button>
       {open && (
-        <div className="absolute right-0 mt-2 w-56 rounded-xl border border-strong bg-bg p-1.5 shadow-lg shadow-black/5" onClick={() => setOpen(false)}>
+        <div className="menu absolute right-0 mt-2 w-60" onClick={() => setOpen(false)}>
           <Link className={item} href={`/u/${user.handle}`}>Profile</Link>
           <Link className={item} href="/publish">Publish an artifact</Link>
           <Link className={item} href="/settings">API tokens</Link>
           <div className="my-1.5 border-t border-border" />
-          <div className="px-3 pb-1 pt-1 text-[11px] font-medium uppercase tracking-wide text-muted">Company hubs</div>
+          <div className="label px-3 pb-1 pt-1">Company hubs</div>
           {orgs.map((o) => <Link key={o.slug} className={item} href={`/org/${o.slug}`}>{o.name}</Link>)}
           <Link className={`${item} text-muted`} href="/org/new">+ New organization</Link>
           <div className="my-1.5 border-t border-border" />
