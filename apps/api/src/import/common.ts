@@ -82,6 +82,32 @@ export function detect(text: string) {
   };
 }
 
+/**
+ * Two source links point at the same upstream item when only the pinned commit differs:
+ * https://github.com/o/r/blob/<sha>/path. Comparing whole URLs would treat every upstream commit as a
+ * different item and duplicate the listing on re-import.
+ */
+export const sameSource = (a: string | null | undefined, b: string | null | undefined) => {
+  const unpin = (u: string | null | undefined) => String(u ?? '').replace(/\/(blob|tree)\/[^/]+\//, '/$1/~/');
+  return !!a && !!b && unpin(a) === unpin(b);
+};
+
+/**
+ * SPDX id of a license text we may redistribute, or null. Only permissive licenses qualify; anything
+ * else (including "All rights reserved" source-available terms) means the item is not imported.
+ */
+export function permissiveLicense(text: string | null | undefined): string | null {
+  const t = String(text ?? '').slice(0, 4000);
+  // Recognise the grant itself; proprietary terms ("governed by your agreement with…") never match.
+  if (/Apache License[\s\S]{0,60}Version 2\.0/i.test(t)) return 'Apache-2.0';
+  if (/Permission is hereby granted, free of charge/i.test(t)) return 'MIT';
+  if (/\bCC0\b|Creative Commons Zero/i.test(t)) return 'CC0-1.0';
+  if (/Redistribution and use in source and binary forms/i.test(t)) return /Neither the name/i.test(t) ? 'BSD-3-Clause' : 'BSD-2-Clause';
+  if (/Permission to use, copy, modify, and\/or distribute this software for any purpose/i.test(t)) return 'ISC';
+  if (/free and unencumbered software released into the public domain/i.test(t)) return 'Unlicense';
+  return null;
+}
+
 export const normalizeVersion = (v: string | undefined): string | null => {
   const s = String(v ?? '').trim().replace(/^v/i, '');
   if (/^\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?$/.test(s)) return s;

@@ -1,4 +1,5 @@
 import type { Ctx } from '../context.js';
+import { COLLECTION_REPOS } from './collections.js';
 
 /**
  * Real GitHub star counts for imported listings, fetched with the GitHub GraphQL API (100 repos per request).
@@ -6,7 +7,7 @@ import type { Ctx } from '../context.js';
  * Listings whose repository is a shared collection (awesome-copilot) are excluded: that repo's stars say
  * nothing about one item inside it.
  */
-const SHARED_COLLECTIONS = new Set(['github/awesome-copilot']);
+const SHARED_COLLECTIONS = new Set(['github/awesome-copilot', ...COLLECTION_REPOS]);
 
 /** "https://github.com/Owner/Repo(.git)(/tree/...)" -> "owner/repo" (lowercased), else null. */
 export function parseGithubRepo(url: string | null | undefined): string | null {

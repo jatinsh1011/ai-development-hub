@@ -4,7 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { parseFrontmatter, type ArtifactFile } from '@aidev/artifact-schema';
 import type { Ctx } from '../context.js';
-import { clean, describe, detect, ensurePublisher, makeImporter, publishImported, slugify, type Importer } from './common.js';
+import { clean, describe, detect, ensurePublisher, makeImporter, publishImported, sameSource, slugify, type Importer } from './common.js';
 
 /**
  * Source: github/awesome-copilot (MIT). Agents, instructions and skills are imported with attribution:
@@ -146,7 +146,7 @@ type Mapped = { skip: string } | { slug: string; kind: 'agent' | 'instruction' |
 async function pickSlug(imp: Importer, slug: string, kind: string, repoUrl: string) {
   for (const cand of [slug, `${slug}-${kind}`]) {
     const row = (await imp.ctx.db.query<{ repository: string | null }>('SELECT repository FROM artifacts WHERE owner_slug=$1 AND slug=$2', [imp.publisher.handle, cand])).rows[0];
-    if (!row || row.repository === repoUrl) return cand;
+    if (!row || sameSource(row.repository, repoUrl)) return cand;
   }
   return null;
 }

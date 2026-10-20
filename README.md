@@ -46,11 +46,23 @@ All listings are real and imported, never invented. Install counts and stars sta
 | Source | What | License / terms | Imported as |
 |---|---|---|---|
 | [Official MCP Registry](https://registry.modelcontextprotocol.io) | MCP servers (remote URLs and npm/PyPI/OCI packages) | publisher-supplied metadata, public API | `mcp-registry/*` |
-| [github/awesome-copilot](https://github.com/github/awesome-copilot) | agents, skills, instructions | MIT; each artifact bundles the upstream `LICENSE` and links the exact commit | `awesome-copilot/*` |
+| [github/awesome-copilot](https://github.com/github/awesome-copilot) | agents, skills, instructions, agentic workflows, plugins | MIT; each artifact bundles the upstream `LICENSE` and links the exact commit | `awesome-copilot/*` |
+| [wshobson/agents](https://github.com/wshobson/agents) | Claude Code agents, skills, slash commands (as prompts), plugins | MIT | `wshobson-agents/*` |
+| [wshobson/commands](https://github.com/wshobson/commands) | slash commands (as prompts), multi-agent workflows | MIT | `wshobson-commands/*` |
+| [VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents) | Claude Code subagents | MIT | `voltagent-subagents/*` |
+| [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) | agents, skills, commands, plugins | Apache-2.0 (plugins with their own restrictive license are skipped) | `claude-plugins/*` |
+| [anthropics/skills](https://github.com/anthropics/skills) | skills | Apache-2.0 per skill (the source-available document skills are skipped) | `anthropic-skills/*` |
+| [openai/skills](https://github.com/openai/skills) | skills | Apache-2.0 per skill | `openai-skills/*` |
+| [obra/superpowers](https://github.com/obra/superpowers) | skills | MIT | `superpowers/*` |
+| [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills) | scientific and research skills | MIT | `scientific-skills/*` |
+| [PatrickJS/awesome-cursorrules](https://github.com/PatrickJS/awesome-cursorrules) | Cursor rules (as instructions) | CC0-1.0 | `cursorrules/*` |
+| [githubnext/agentics](https://github.com/githubnext/agentics) | GitHub Agentic Workflows (installed as on-demand workflows) | MIT | `agentics/*` |
 
 Curation rules for MCP servers (from about 38.7k registry entries to about 21k listings): there must be a repository or website link, placeholder names (test/example/template) are dropped, there are at most 3 servers per publisher namespace (bulk publishers flood the registry otherwise), and only entries whose connection can be expressed faithfully are kept. Templated URLs, required headers and user-supplied arguments are skipped, never guessed. Anything failing the security scan is rejected (e.g. 13 awesome-copilot skills containing `curl | bash`, broad `rm -rf` or credential paths). Imported listings are labelled **not reviewed** on their pages.
 
-Re-run `npm run import` any time; it is idempotent (unchanged listings are skipped; changed upstream content becomes a new version). Options: `npm run import -- mcp|awesome-copilot [--limit N] [--per-namespace N]`.
+Collections are imported only when their content is permissively licensed (MIT, Apache-2.0, BSD, ISC, CC0). The license that applies to an item is the nearest `LICENSE` file above it, so a plugin with its own source-available terms inside an Apache-2.0 repository is skipped. Identical copies of an agent shared by several plugins become one listing, and plugins depend on the listings of their parts. Hooks, LSP and Copilot-extension-only plugins are skipped because aidev can't install them across tools.
+
+Re-run `npm run import` any time; it is idempotent (unchanged listings are skipped; changed upstream content becomes a new version). Options: `npm run import -- mcp|awesome-copilot|collections [--limit N] [--per-namespace N] [--source <collection id>] [--sources-dir <dir of owner_repo checkouts>]`.
 
 The fictional demo catalog (Acme company, demo users) still exists for tests and screenshots only: `npm run demo -w @aidev/api` on an empty database.
 
