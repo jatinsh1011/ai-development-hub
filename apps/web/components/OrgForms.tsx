@@ -185,7 +185,7 @@ export function TokenManager({ tokens }: { tokens: { id: string; name: string; k
           <p className="mb-2 text-sm font-medium">Copy this token now — it is shown once.</p>
           <code className="block break-all rounded-xl bg-surface p-3 font-mono text-xs text-fg">{fresh}</code>
           <p className="mt-2 text-xs text-muted">
-            Use it as <span className="font-mono">AIDEV_TOKEN</span> or <span className="font-mono">aidev login --token</span>.
+            Use it as <span className="font-mono">AIDEV_TOKEN</span> or <span className="font-mono">aidevkit login --token</span>.
           </p>
         </div>
       )}

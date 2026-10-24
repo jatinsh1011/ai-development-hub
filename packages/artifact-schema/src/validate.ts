@@ -31,7 +31,7 @@ export function validateArtifact(allFiles: ArtifactFile[]): ValidationReport {
 
   const mf = files.find((f) => f.path === MANIFEST_FILE);
   if (!mf) {
-    err(MANIFEST_FILE, `missing ${MANIFEST_FILE} (run \`aidev init\`)`);
+    err(MANIFEST_FILE, `missing ${MANIFEST_FILE} (run \`aidevkit init\`)`);
     return { ok: false, files, issues, findings: [] };
   }
   let raw: unknown;

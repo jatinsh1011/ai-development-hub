@@ -71,7 +71,7 @@ export class ArtifactsService {
       ...cols,
       team, org, starred,
       governance: await governance(this.db, a, viewer?.id ?? null),
-      installCommand: `aidev install ${a.owner_slug}/${a.slug}`,
+      installCommand: `aidevkit install ${a.owner_slug}/${a.slug}`,
       version: { version: v.version, sha256: v.sha256, manifest: v.manifest, readme: v.readme, files: v.file_index, risk: v.risk, findings: v.findings, createdAt: v.created_at },
       versions,
     };

@@ -12,7 +12,7 @@ export default async function Settings() {
     <div className="mx-auto max-w-2xl px-5 py-16">
       <h1 className="h-display text-4xl">API tokens</h1>
       <p className="mb-8 mt-4 text-lg text-muted">
-        For CI and coding agents. Set <span className="font-mono text-sm">AIDEV_TOKEN</span> and every <span className="font-mono text-sm">aidev</span> command authenticates without a prompt.
+        For CI and coding agents. Set <span className="font-mono text-sm">AIDEV_TOKEN</span> and every <span className="font-mono text-sm">aidevkit</span> command authenticates without a prompt.
       </p>
       <TokenManager tokens={tokens} />
     </div>

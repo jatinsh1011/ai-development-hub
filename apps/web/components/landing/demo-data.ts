@@ -1,6 +1,6 @@
 /**
  * Script and file contents for the landing-page install demo.
- * Every terminal line and file below was captured from the real `aidev` CLI (v0.1.0) installing
+ * Every terminal line and file below was captured from the real `aidevkit` CLI (v0.1.0) installing
  * real catalog listings; only the rollback ids are reused from those runs.
  */
 import { m, type Step, type TermLine } from './demo-engine';
@@ -71,13 +71,13 @@ const EXTRA = [
 const WORKSPACE_FILES = ['.aidev-lock.json', '.aidev/state.json'];
 export const BASE_FILES = ['README.md', 'package.json', 'tsconfig.json', '.gitignore', 'src/app.tsx', 'src/lib/cart.ts'];
 export const DEFAULT_OPEN = 'README.md';
-/** Folders the explorer never expands (aidev's own bookkeeping). */
+/** Folders the explorer never expands (aidevkit's own bookkeeping). */
 export const COLLAPSED = new Set(['.aidev']);
 
 const blank: TermLine = [{ t: '' }];
 const out = (src: string, wait?: number): Step => ({ kind: 'out', line: m(src), wait });
 
-/** Output of `aidev install <short>`, as printed by the real CLI, plus the files it writes. */
+/** Output of `aidevkit install <short>`, as printed by the real CLI, plus the files it writes. */
 function installSteps(a: Art, id: ToolId, files: string[]): Step[] {
   const name = tool(id).name;
   const first = !files.includes('.aidev-lock.json');
@@ -102,7 +102,7 @@ function installSteps(a: Art, id: ToolId, files: string[]): Step[] {
     { kind: 'out', line: blank, wait: 60 },
     ...written.map((path): Step => ({ kind: 'add', path, wait: 0 })),
     ...(first ? WORKSPACE_FILES.map((path): Step => ({ kind: 'add', path })) : []),
-    out(`{ok:✓} Rollback point created  ${a.backup}  {dim:(undo with \`aidev rollback ${a.backup}\`)}`, 380),
+    out(`{ok:✓} Rollback point created  ${a.backup}  {dim:(undo with \`aidevkit rollback ${a.backup}\`)}`, 380),
     out('{ok:✓} Configuration updated', 220),
     { kind: 'open', path: written[0], wait: 120 },
     { kind: 'out', line: blank, wait: 100 },
@@ -117,31 +117,31 @@ const filesAfter = (n: number, id: ToolId) => [...BASE_FILES, ...ARTS.slice(0, n
 export const SCENES: Scene[] = [
   {
     id: 'mcp', label: 'an MCP server',
-    coach: { title: 'one command.', body: 'aidev writes the MCP config {tool} reads, in the format it expects.' },
-    steps: (id) => [{ kind: 'type', text: `aidev install ${ARTS[0].short}`, pre: 700 }, ...installSteps(ARTS[0], id, filesAfter(0, id)),
+    coach: { title: 'one command.', body: 'aidevkit writes the MCP config {tool} reads, in the format it expects.' },
+    steps: (id) => [{ kind: 'type', text: `aidevkit install ${ARTS[0].short}`, pre: 700 }, ...installSteps(ARTS[0], id, filesAfter(0, id)),
       { kind: 'sticker', text: `✓ ready in ${tool(id).name}`, tone: 'amber', pos: 'top', wait: 260 }],
   },
   {
     id: 'skill', label: 'a skill',
     coach: { title: 'skills, too.', body: 'Same command. The SKILL.md lands in the folder {tool} looks in.' },
-    steps: (id) => [{ kind: 'type', text: `aidev install ${ARTS[1].short}`, pre: 600 }, ...installSteps(ARTS[1], id, filesAfter(1, id)),
+    steps: (id) => [{ kind: 'type', text: `aidevkit install ${ARTS[1].short}`, pre: 600 }, ...installSteps(ARTS[1], id, filesAfter(1, id)),
       { kind: 'sticker', text: 'it’s just files', tone: 'mint', pos: 'top', wait: 260 }],
   },
   {
     id: 'agent', label: 'an agent',
     coach: { title: 'it asks first.', body: 'You see every permission before anything is written.' },
-    steps: (id) => [{ kind: 'type', text: `aidev install ${ARTS[2].short}`, pre: 600 }, ...installSteps(ARTS[2], id, filesAfter(2, id)),
+    steps: (id) => [{ kind: 'type', text: `aidevkit install ${ARTS[2].short}`, pre: 600 }, ...installSteps(ARTS[2], id, filesAfter(2, id)),
       { kind: 'sticker', text: 'rollback point saved', tone: 'pink', pos: 'top', wait: 260 }],
   },
   {
     id: 'undo', label: 'undo it',
     coach: { title: 'changed your mind?', body: 'Every install is a rollback point. One command puts the files back.' },
     steps: (id) => [
-      { kind: 'type', text: 'aidev rollback ', paste: ARTS[2].backup, pre: 700 },
+      { kind: 'type', text: 'aidevkit rollback ', paste: ARTS[2].backup, pre: 700 },
       out(`{ok:✓} Restored 1 file(s); reverted ${ARTS[2].ref}`, 480),
       { kind: 'remove', path: ARTS[2].files[id][0] },
       { kind: 'sticker', text: '✓ undone', tone: 'pink', pos: 'top', wait: 240 },
-      { kind: 'type', text: 'aidev list', pre: 1300 },
+      { kind: 'type', text: 'aidevkit list', pre: 1300 },
       out(`{b:${ARTS[0].ref}}@${ARTS[0].version}  {dim:${ARTS[0].type} · ${tool(id).key}}`, 300),
       out(`{b:${ARTS[1].ref}}@${ARTS[1].version}  {dim:${ARTS[1].type} · ${tool(id).key}}`, 80),
     ],
@@ -302,7 +302,7 @@ export function fileFor(path: string, id: ToolId): { lang: Lang; text: string } 
 
 /* ---- commands a visitor can type ---------------------------------------------------------- */
 
-const HELP = `Usage: aidev [options] [command]
+const HELP = `Usage: aidevkit [options] [command]
 
 Package manager for reusable AI development building blocks
 
@@ -340,8 +340,8 @@ export function respond(input: string, ctx: { tool: ToolId; files: string[] }): 
     const f = args[0] && ctx.files.includes(args[0]) ? fileFor(args[0], ctx.tool) : null;
     return { steps: f ? lines(f.text) : [out(`cat: ${args[0] ?? ''}: No such file or directory`, 60)] };
   }
-  if (cmd === 'npm' || cmd === 'npx') return { steps: [out('{dim:aidev is already installed in this demo. In your own terminal: npm i -g aidevkit-cli}', 80)] };
-  if (cmd !== 'aidev') return { steps: [out(`zsh: command not found: ${cmd}`, 60)] };
+  if (cmd === 'npm' || cmd === 'npx') return { steps: [out('{dim:aidevkit is already installed in this demo. In your own terminal: npm i -g aidevkit-cli}', 80)] };
+  if (cmd !== 'aidevkit' && cmd !== 'aidev') return { steps: [out(`zsh: command not found: ${cmd}`, 60)] };
 
   const sub = args[0];
   const name = args[1];
@@ -368,7 +368,7 @@ export function respond(input: string, ctx: { tool: ToolId; files: string[] }): 
 
   if (sub === 'info') {
     const a = name ? find(name) : undefined;
-    if (!a) return { steps: [out(`{er:✗} artifact "${name ?? ''}" not found`, 120), out('{dim:  try aidev search <query>}', 20)] };
+    if (!a) return { steps: [out(`{er:✗} artifact "${name ?? ''}" not found`, 120), out('{dim:  try aidevkit search <query>}', 20)] };
     return {
       steps: [
         out(`{b:${a.title}}  ${a.ref}@${a.version}`, 140),
@@ -380,7 +380,7 @@ export function respond(input: string, ctx: { tool: ToolId; files: string[] }): 
         out('{b:Permissions:}', 20),
         ...a.perms.map((p) => out(`  ${p}`, 20)),
         { kind: 'out', line: blank, wait: 20 },
-        out(`{dim:  $ aidev install ${a.ref}}`, 20),
+        out(`{dim:  $ aidevkit install ${a.ref}}`, 20),
       ],
     };
   }
@@ -388,13 +388,13 @@ export function respond(input: string, ctx: { tool: ToolId; files: string[] }): 
   if (sub === 'install' || sub === 'i' || sub === 'add') {
     const a = name ? find(name) : undefined;
     if (!name) return { steps: [out('{dim:Nothing to restore: no .aidev-lock.json entries are missing.}', 100)] };
-    if (!a) return { steps: [out(`Resolving ${name}...`, 120), out(`{er:✗} artifact "${name}" not found`, 380), out('{dim:  try aidev search <query>, or install github-mcp-server, create-readme or playwright-tester}', 20)] };
+    if (!a) return { steps: [out(`Resolving ${name}...`, 120), out(`{er:✗} artifact "${name}" not found`, 380), out('{dim:  try aidevkit search <query>, or install github-mcp-server, create-readme or playwright-tester}', 20)] };
     return { steps: installSteps(a, ctx.tool, ctx.files).map((s) => (s.kind === 'out' && 'wait' in s ? { ...s, wait: Math.min(s.wait ?? 0, 520) } : s)) };
   }
 
   if (sub === 'list' || sub === 'ls') {
     const inst = installedNow(ctx.files, ctx.tool);
-    if (!inst.length) return { steps: [out('Nothing installed. Try `aidev search <query>`.', 80)] };
+    if (!inst.length) return { steps: [out('Nothing installed. Try `aidevkit search <query>`.', 80)] };
     return { steps: inst.map((a) => out(`{b:${a.ref}}@${a.version}  {dim:${a.type} · ${tool(ctx.tool).key}}`, 60)) };
   }
 
@@ -415,8 +415,8 @@ export function respond(input: string, ctx: { tool: ToolId; files: string[] }): 
   }
 
   if (['uninstall', 'remove', 'update', 'doctor', 'init', 'publish', 'login', 'logout', 'whoami', 'browse', 'team', 'provider', 'config'].includes(sub)) {
-    return { steps: [out(`{dim:aidev ${sub} works in your own terminal. This demo knows search, info, install, list and rollback.}`, 80)] };
+    return { steps: [out(`{dim:aidevkit ${sub} works in your own terminal. This demo knows search, info, install, list and rollback.}`, 80)] };
   }
 
-  return { steps: [out(`{er:✗} unknown command '${sub}'`, 80), out('{dim:  see aidev --help}', 20)] };
+  return { steps: [out(`{er:✗} unknown command '${sub}'`, 80), out('{dim:  see aidevkit --help}', 20)] };
 }

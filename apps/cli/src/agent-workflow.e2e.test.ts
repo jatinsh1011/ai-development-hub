@@ -1,5 +1,5 @@
 /**
- * End-to-end: the real `aidev` binary against a live (in-memory, seeded) registry.
+ * End-to-end: the real `aidevkit` binary against a live (in-memory, seeded) registry.
  * The first block replays what a coding agent with shell access would do:
  *   search --json → info --json → install --yes --json → use the installed files.
  */
@@ -15,7 +15,7 @@ import { MemoryStorage } from '../../api/src/storage.js';
 import { seedIfEmpty } from '../../api/src/fixtures/seed.js';
 
 const run = promisify(execFile);
-const BIN = path.resolve(__dirname, '../dist/aidev.js');
+const BIN = path.resolve(__dirname, '../dist/aidevkit.js');
 let app: Awaited<ReturnType<typeof createApp>>, registry: string, proj: string, home: string, cfg: string;
 let demoToken = '', aliceToken = '';
 
@@ -69,7 +69,7 @@ describe('agent workflow (search → info → install → use)', () => {
     const r = await aidev(['info', 'react-19-migration', '--json']);
     expect(r.code).toBe(0);
     const a = r.json.artifact;
-    expect(a.installCommand).toBe('aidev install aidev/react-19-migration');
+    expect(a.installCommand).toBe('aidevkit install aidev/react-19-migration');
     expect(a.version.manifest.compatibility.copilot).toBe(true);
     expect(a.version.risk.some((x: any) => x.label === 'Local command execution')).toBe(true);
   });

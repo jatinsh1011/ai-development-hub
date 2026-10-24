@@ -3,7 +3,7 @@ import { BlocksMark } from '@/components/landing/BlocksMark';
 import { rounded } from '@/lib/fonts';
 import './(landing)/landing.css';
 
-export const metadata: Metadata = { title: 'Page not found · aidev' };
+export const metadata: Metadata = { title: 'Page not found · aidevkit' };
 
 const themeScript = `try{var t=localStorage.getItem('aidev-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}`;
 

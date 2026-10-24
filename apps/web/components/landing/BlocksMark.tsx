@@ -1,5 +1,5 @@
 /**
- * aidev's mark: three building blocks in place and a fourth one dropping in (it snaps into place
+ * aidevkit's mark: three building blocks in place and a fourth one dropping in (it snaps into place
  * when the brand link is hovered). `eyes` adds the peeking mascot face used once on the page.
  */
 export function BlocksMark({ className, eyes = false, title }: { className?: string; eyes?: boolean; title?: string }) {

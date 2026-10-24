@@ -62,7 +62,7 @@ export class AuthService {
       );
       if (r.rows[0]) return r.rows[0];
     }
-    if (required) throw new UnauthorizedException({ error: 'authentication required', hint: 'run `aidev login` or set AIDEV_TOKEN' });
+    if (required) throw new UnauthorizedException({ error: 'authentication required', hint: 'run `aidevkit login` or set AIDEV_TOKEN' });
     return null;
   }
 

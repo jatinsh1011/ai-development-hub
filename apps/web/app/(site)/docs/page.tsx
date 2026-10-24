@@ -7,15 +7,15 @@ const Code = ({ children }: { children: string }) => (
 export default function Docs() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-16">
-      <h1 className="h-display text-5xl sm:text-6xl">The aidev CLI</h1>
+      <h1 className="h-display text-5xl sm:text-6xl">The aidevkit CLI</h1>
       <p className="mt-5 text-lg text-muted">A package manager for AI development building blocks. Humans and coding agents use the same commands.</p>
 
       <div className="prose-hub mt-12" style={{ maxWidth: 'none' }}>
         <h2>Install</h2>
-        <Code>{`npm install -g aidevkit-cli      # the command is aidev
-aidev search "playwright"
-aidev info playwright-tester
-aidev install playwright-tester`}</Code>
+        <Code>{`npm install -g aidevkit-cli
+aidevkit search "playwright"
+aidevkit info playwright-tester
+aidevkit install playwright-tester`}</Code>
 
         <h2>Where files go</h2>
         <p>Each provider adapter translates one neutral artifact into that tool’s current format. Nothing is overwritten silently: conflicts abort, <code>--force</code> backs up first, and every install is a rollback point.</p>
@@ -32,9 +32,9 @@ aidev install playwright-tester`}</Code>
 
         <h2>For coding agents</h2>
         <p>Every command supports <code>--json</code> (a single JSON document on stdout), <code>--yes</code> (non-interactive consent) and <code>--no-color</code>. Authenticate with <code>AIDEV_TOKEN</code>.</p>
-        <Code>{`aidev search "react 19" --json
-aidev info react19-migrator --json
-aidev install react19-migrator --yes --json --provider copilot`}</Code>
+        <Code>{`aidevkit search "react 19" --json
+aidevkit info react19-migrator --json
+aidevkit install react19-migrator --yes --json --provider copilot`}</Code>
         <table>
           <thead><tr><th>Exit</th><th>Meaning</th></tr></thead>
           <tbody>
@@ -54,9 +54,9 @@ aidev install react19-migrator --yes --json --provider copilot`}</Code>
         <p>Artifacts are untrusted. Installing never executes anything: scripts are copied, not run. Permissions are shown before install, high-severity scan findings require <code>--allow-risky</code>, content hashes are verified, and company-blocked artifacts are refused.</p>
 
         <h2>Publish</h2>
-        <Code>{`aidev init artifact skill my-skill
-cd my-skill && aidev publish --dry-run
-aidev publish --org acme --visibility organization`}</Code>
+        <Code>{`aidevkit init artifact skill my-skill
+cd my-skill && aidevkit publish --dry-run
+aidevkit publish --org acme --visibility organization`}</Code>
       </div>
     </div>
   );

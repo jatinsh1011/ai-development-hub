@@ -64,7 +64,7 @@ function printItems(o: Output, items: SearchItem[]) {
   }
 }
 
-const prog = new Command('aidev')
+const prog = new Command('aidevkit')
   .description('Package manager for reusable AI development building blocks')
   .version(VERSION)
   .option('--json', 'machine-readable JSON output (one document on stdout)')
@@ -213,7 +213,7 @@ prog.command('list').alias('ls').description('list installed artifacts').option(
     const entries = Object.values(state.installed);
     let outdated: Record<string, string> = {};
     if (o.outdated && entries.length) outdated = Object.fromEntries((await env.client.updates(entries.map((e) => ({ ref: e.ref, version: e.version })))).updates.filter((u) => u.updateAvailable).map((u) => [u.ref, u.latest]));
-    if (!entries.length) env.out.line('Nothing installed. Try `aidev search <query>`.');
+    if (!entries.length) env.out.line('Nothing installed. Try `aidevkit search <query>`.');
     for (const e of entries) env.out.line(`${env.out.c('bold', e.ref)}@${e.version}  ${env.out.c('dim', `${e.type} · ${Object.keys(e.providers).join(', ')}${e.explicit ? '' : ' · dependency'}`)}${outdated[e.ref] ? env.out.c('yellow', `  → ${outdated[e.ref]} available`) : ''}`);
     env.out.result({ scope: scopeOf(o), installed: entries.map((e) => ({ ref: e.ref, type: e.type, version: e.version, sha256: e.sha256, explicit: e.explicit, providers: Object.keys(e.providers), latest: outdated[e.ref] ?? null })) });
   }, prog));
@@ -258,7 +258,7 @@ const init = prog.command('init').description('detect your project and recommend
     for (const r of avail) env.out.line(`  [${r.ref}]  ${env.out.c('dim', r.why)}`);
     env.out.result({ detected: { ...info, providers: found.map((f) => f.adapter.id) }, recommended: avail.map(({ ref, why }) => ({ ref, why })) });
     if (!avail.length || env.out.json) return;
-    if (!env.prompt.interactive) { env.out.info('\nRun `aidev install <name>` for each, or re-run interactively.'); return; }
+    if (!env.prompt.interactive) { env.out.info('\nRun `aidevkit install <name>` for each, or re-run interactively.'); return; }
     if (await env.prompt.confirm('\nInstall recommended setup?', false)) {
       for (const r of avail) await installRef(env, r.ref, { scope: 'project', yes: true, providers: found.length === 1 ? [found[0].adapter.id] : undefined, all: found.length > 1 });
     }
@@ -272,7 +272,7 @@ init.command('artifact <type> <name>').description(`scaffold a new artifact in .
     let files; try { files = scaffold(type, name, me); } catch (e) { throw new CliError(Exit.USAGE, 'usage', (e as Error).message); }
     for (const f of files) { await fs.mkdir(path.dirname(path.join(dir, f.path)), { recursive: true }); await fs.writeFile(path.join(dir, f.path), f.content); }
     env.out.ok(`Created ${displayPath(dir, env)}/ (${files.map((f) => f.path).join(', ')})`);
-    env.out.info('Edit it, then run `aidev publish` from that directory.');
+    env.out.info('Edit it, then run `aidevkit publish` from that directory.');
     env.out.result({ dir, files: files.map((f) => f.path) });
   }, prog));
 
@@ -299,7 +299,7 @@ prog.command('publish [dir]').description('validate and publish an artifact dire
     }
     const r = await env.client.publish({ files, owner: o.org, team: o.team, visibility: o.visibility });
     env.out.ok(`Published ${r.owner}/${r.slug}@${r.version}  (${r.visibility})`);
-    env.out.line(`  $ aidev install ${r.owner}/${r.slug}`);
+    env.out.line(`  $ aidevkit install ${r.owner}/${r.slug}`);
     env.out.result({ published: r });
   }, prog));
 

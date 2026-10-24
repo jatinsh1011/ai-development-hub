@@ -4,14 +4,14 @@ import { CopyInstall, ScrollFlag, ThemeSwitch } from '@/components/landing/Clien
 import { InstallDemo } from '@/components/landing/InstallDemo';
 import { GITHUB_URL, SITE_URL } from '@/lib/site';
 
-const title = 'aidev: install AI agents, skills and MCP servers';
+const title = 'aidevkit: install AI agents, skills and MCP servers';
 const description = 'One command installs AI agents, skills and MCP servers into GitHub Copilot, Claude Code and Codex, with permissions shown first and one-step undo.';
 
 export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: '/' },
-  openGraph: { type: 'website', url: '/', siteName: 'aidev', title, description, locale: 'en_US' },
+  openGraph: { type: 'website', url: '/', siteName: 'aidevkit', title, description, locale: 'en_US' },
   twitter: { card: 'summary_large_image', title, description },
 };
 
@@ -45,12 +45,12 @@ const HUB = [
 ] as const;
 
 const FAQ = [
-  { q: 'What does aidev install?', a: 'Agents, skills, MCP servers, prompts, instructions, workflows and plugins: the reusable pieces that make an AI coding tool good at your project. Each one is a versioned listing on the hub.' },
-  { q: 'Which AI coding tools does it support?', a: 'GitHub Copilot, Claude Code and Codex. aidev detects the tool your project uses, or you pick one with --provider. The same command works for all three.' },
+  { q: 'What does aidevkit install?', a: 'Agents, skills, MCP servers, prompts, instructions, workflows and plugins: the reusable pieces that make an AI coding tool good at your project. Each one is a versioned listing on the hub.' },
+  { q: 'Which AI coding tools does it support?', a: 'GitHub Copilot, Claude Code and Codex. aidevkit detects the tool your project uses, or you pick one with --provider. The same command works for all three.' },
   { q: 'Where do the files go?', a: 'Into your project, in each tool’s own folder: .github/ and .vscode/ for Copilot, .claude/ and .mcp.json for Claude Code, .agents/ and .codex/ for Codex. They are plain files you can read, diff and commit.' },
-  { q: 'How do I add an MCP server to Claude Code?', a: 'Run aidev install <name>. aidev adds the server to .mcp.json in your project, and Claude Code asks you to approve it the first time it starts.' },
-  { q: 'Can I undo an install?', a: 'Yes. Every install creates a rollback point, and aidev rollback <id> puts the files back the way they were.' },
-  { q: 'Can my coding agent use aidev on its own?', a: 'Yes. Commands support --json and --yes and return documented exit codes, so an agent can search, inspect and install without anyone at the keyboard.' },
+  { q: 'How do I add an MCP server to Claude Code?', a: 'Run aidevkit install <name>. aidevkit adds the server to .mcp.json in your project, and Claude Code asks you to approve it the first time it starts.' },
+  { q: 'Can I undo an install?', a: 'Yes. Every install creates a rollback point, and aidevkit rollback <id> puts the files back the way they were.' },
+  { q: 'Can my coding agent use aidevkit on its own?', a: 'Yes. Commands support --json and --yes and return documented exit codes, so an agent can search, inspect and install without anyone at the keyboard.' },
   { q: 'Where do the listings come from?', a: 'From the official MCP Registry, github/awesome-copilot and ten other openly licensed collections, like anthropics/skills, openai/skills and wshobson/agents. Each is imported with a link to its source and marked “not reviewed”, and anything that fails the security scan is left out.' },
   { q: 'Is it free?', a: 'Yes. The CLI and the hub are free to use, and the code is on GitHub.' },
 ];
@@ -60,7 +60,7 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'SoftwareApplication',
-      name: 'aidev',
+      name: 'aidevkit',
       applicationCategory: 'DeveloperApplication',
       operatingSystem: 'Any (Node.js 20 or newer)',
       softwareVersion: '0.1.0',
@@ -71,7 +71,7 @@ const jsonLd = {
     },
     {
       '@type': 'WebSite',
-      name: 'aidev',
+      name: 'aidevkit',
       url: SITE_URL,
       potentialAction: { '@type': 'SearchAction', target: `${SITE_URL}/search?q={search_term_string}`, 'query-input': 'required name=search_term_string' },
     },
@@ -92,7 +92,7 @@ export default function Landing() {
       <a className="skip-link" href="#main">Skip to content</a>
 
       <header className="site-header wrap">
-        <a className="brand" href="/" aria-label="aidev home"><BlocksMark className="brand-mark" />aidev.</a>
+        <a className="brand" href="/" aria-label="aidevkit home"><BlocksMark className="brand-mark" />aidevkit.</a>
         <nav className="nav" aria-label="Main">
           <a href="#demo">how it works</a>
           <a href="/search">browse</a>
@@ -111,7 +111,7 @@ export default function Landing() {
             <div>
               <h1 id="hero-title" className="display">AI agents, skills and MCP servers,<br /><span className="accent">one command away.</span></h1>
               <p className="lede">
-                aidev installs reusable building blocks into GitHub Copilot, Claude Code and Codex. It puts each one where your tool looks for it,
+                aidevkit installs reusable building blocks into GitHub Copilot, Claude Code and Codex. It puts each one where your tool looks for it,
                 shows you what it can touch first, and undoes it in one step.
               </p>
               <div className="chips" aria-label="Works with">
@@ -128,7 +128,7 @@ export default function Landing() {
             </div>
           </section>
 
-          <section id="demo" aria-label="See aidev install something">
+          <section id="demo" aria-label="See aidevkit install something">
             <InstallDemo />
           </section>
         </div>
@@ -139,10 +139,10 @@ export default function Landing() {
           <div className="wrap">
             <div className="section-head">
               <h2 id="folders-title" className="title">every tool wants<br /><span className="accent">its own folder.</span></h2>
-              <p className="lede">Copilot, Claude Code and Codex read agents, skills and MCP config from different places, in different formats. aidev knows all of them, so you type the same thing everywhere.</p>
+              <p className="lede">Copilot, Claude Code and Codex read agents, skills and MCP config from different places, in different formats. aidevkit knows all of them, so you type the same thing everywhere.</p>
             </div>
             <div className="one-cmd">
-              <code className="terminal"><span className="pr">~/your-project $</span> aidev install <span className="ok">&lt;name&gt;</span></code>
+              <code className="terminal"><span className="pr">~/your-project $</span> aidevkit install <span className="ok">&lt;name&gt;</span></code>
               <span className="note">one command, three very different results:</span>
             </div>
             <div className="tools">
@@ -189,13 +189,13 @@ export default function Landing() {
                 <div className="card-art" aria-hidden>
                   <div className="art-stack">
                     <div className="terminal" style={{ rotate: '1.5deg' }}>
-                      <div><span className="pr">$</span> aidev rollback 2026-10-19T…</div>
+                      <div><span className="pr">$</span> aidevkit rollback 2026-10-19T…</div>
                       <div><span className="ok">✓</span> Restored 1 file(s)</div>
                     </div>
                     <span className="sticker s-pink" style={{ ['--tilt' as string]: '-4deg' }}>rollback point saved</span>
                   </div>
                 </div>
-                <div className="card-body"><h3 className="card-title">every install can be undone.</h3><p>aidev saves a rollback point before it touches a file. One command puts them back.</p></div>
+                <div className="card-body"><h3 className="card-title">every install can be undone.</h3><p>aidevkit saves a rollback point before it touches a file. One command puts them back.</p></div>
               </article>
               <article className="card">
                 <div className="card-art tone-green" aria-hidden>
@@ -206,7 +206,7 @@ export default function Landing() {
                     <div>{'}'}</div>
                   </div>
                 </div>
-                <div className="card-body"><h3 className="card-title">same setup on every laptop.</h3><p>.aidev-lock.json pins versions and hashes. A teammate runs aidev install and gets exactly what you have.</p></div>
+                <div className="card-body"><h3 className="card-title">same setup on every laptop.</h3><p>.aidev-lock.json pins versions and hashes. A teammate runs aidevkit install and gets exactly what you have.</p></div>
               </article>
             </div>
 
@@ -228,7 +228,7 @@ export default function Landing() {
                     <div className="row"><span>major update</span><span className="status is-warn">asks first</span></div>
                   </div>
                 </div>
-                <div className="card-body"><h3 className="tile-title">will an update break it?</h3><p>aidev update asks before it applies a major version.</p></div>
+                <div className="card-body"><h3 className="tile-title">will an update break it?</h3><p>aidevkit update asks before it applies a major version.</p></div>
               </article>
               <article className="card">
                 <div className="card-art tone-pink" aria-hidden>
@@ -240,7 +240,7 @@ export default function Landing() {
                     <span className="sticker s-white" style={{ ['--tilt' as string]: '3deg' }}>not reviewed</span>
                   </div>
                 </div>
-                <div className="card-body"><h3 className="tile-title">is this MCP server safe?</h3><p>aidev scans every listing for risky patterns like curl | bash, and marks imported ones as not reviewed.</p></div>
+                <div className="card-body"><h3 className="tile-title">is this MCP server safe?</h3><p>aidevkit scans every listing for risky patterns like curl | bash, and marks imported ones as not reviewed.</p></div>
               </article>
               <article className="card">
                 <div className="card-art tone-green" aria-hidden>
@@ -254,9 +254,9 @@ export default function Landing() {
               </article>
               <article className="card">
                 <div className="card-art" aria-hidden>
-                  <span className="sticker s-blue" style={{ ['--tilt' as string]: '-3deg' }}>$ aidev publish ./my-skill</span>
+                  <span className="sticker s-blue" style={{ ['--tilt' as string]: '-3deg' }}>$ aidevkit publish ./my-skill</span>
                 </div>
-                <div className="card-body"><h3 className="tile-title">made something good?</h3><p>aidev publish validates a folder and gives it a page, a version and an install command.</p></div>
+                <div className="card-body"><h3 className="tile-title">made something good?</h3><p>aidevkit publish validates a folder and gives it a page, a version and an install command.</p></div>
               </article>
               <article className="card">
                 <div className="card-art tone-orange" aria-hidden>
@@ -268,7 +268,7 @@ export default function Landing() {
                     <div className="h">&lt;!-- aidev:end react-rules --&gt;</div>
                   </div>
                 </div>
-                <div className="card-body"><h3 className="tile-title">already have a CLAUDE.md?</h3><p>aidev adds its own marked block and leaves the rest of your file alone.</p></div>
+                <div className="card-body"><h3 className="tile-title">already have a CLAUDE.md?</h3><p>aidevkit adds its own marked block and leaves the rest of your file alone.</p></div>
               </article>
             </div>
           </div>
@@ -327,7 +327,7 @@ export default function Landing() {
       <footer className="wrap site-footer">
         <div className="footer-top">
           <div>
-            <a className="brand" href="/"><BlocksMark className="brand-mark" />aidev.</a>
+            <a className="brand" href="/"><BlocksMark className="brand-mark" />aidevkit.</a>
             <p className="small" style={{ marginTop: 10 }}>the package manager for your AI coding tools.</p>
           </div>
           <div className="actions" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -343,7 +343,7 @@ export default function Landing() {
             <a className="foot-chip c-green" href="/publish"><span className="icon-sq"><svg viewBox="0 0 24 24"><path d="M12 20V8m-5 5 5-5 5 5M5 4h14" /></svg></span>publish</a>
             <a className="foot-chip c-purple" href={GITHUB_URL} rel="noopener"><span className="icon-sq"><svg viewBox="0 0 24 24"><path d="M9 19c-4 1.3-4-2-6-2.5M15 21v-3.4a3 3 0 0 0-.8-2.3c2.7-.3 5.6-1.4 5.6-6a4.7 4.7 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.6 11.6 0 0 0-6 0C6.6 2.6 5.6 2.9 5.6 2.9a4.3 4.3 0 0 0-.1 3.2A4.7 4.7 0 0 0 4.2 9.3c0 4.6 2.8 5.7 5.5 6a3 3 0 0 0-.8 2.3V21" /></svg></span>github ↗</a>
           </nav>
-          <div className="footer-utility"><a href="/docs">for coding agents</a><span>© 2026 aidev</span></div>
+          <div className="footer-utility"><a href="/docs">for coding agents</a><span>© 2026 aidevkit</span></div>
         </div>
       </footer>
     </>

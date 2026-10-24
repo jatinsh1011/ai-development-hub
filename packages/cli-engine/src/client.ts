@@ -22,16 +22,16 @@ export class RegistryClient {
     try {
       res = await fetch(this.cfg.registry + '/v1' + path, {
         method,
-        headers: { 'content-type': 'application/json', 'user-agent': 'aidev-cli', ...(this.cfg.token ? { authorization: `Bearer ${this.cfg.token}` } : {}) },
+        headers: { 'content-type': 'application/json', 'user-agent': 'aidevkit-cli', ...(this.cfg.token ? { authorization: `Bearer ${this.cfg.token}` } : {}) },
         body: body === undefined ? undefined : JSON.stringify(body),
       });
     } catch (e) {
-      throw new CliError(Exit.NETWORK, 'network', `cannot reach registry at ${this.cfg.registry}`, 'check `aidev config` or set AIDEV_REGISTRY', String(e));
+      throw new CliError(Exit.NETWORK, 'network', `cannot reach registry at ${this.cfg.registry}`, 'check `aidevkit config` or set AIDEV_REGISTRY', String(e));
     }
     const data: any = await res.json().catch(() => ({}));
     if (res.ok) return data as T;
     const msg: string = data.error ?? data.message ?? `registry returned ${res.status}`;
-    if (res.status === 401) throw new CliError(Exit.AUTH, 'auth', msg, data.hint ?? 'run `aidev login` or set AIDEV_TOKEN');
+    if (res.status === 401) throw new CliError(Exit.AUTH, 'auth', msg, data.hint ?? 'run `aidevkit login` or set AIDEV_TOKEN');
     if (res.status === 403) throw new CliError(data.code === 'BLOCKED' ? Exit.POLICY : Exit.AUTH, data.code === 'BLOCKED' ? 'blocked' : 'forbidden', msg, data.code === 'BLOCKED' ? 'ask your company admin to unblock it' : undefined);
     if (res.status === 404) throw new CliError(Exit.NOT_FOUND, 'not-found', msg);
     if (res.status === 409) throw new CliError(Exit.CONFLICT, 'conflict', msg);

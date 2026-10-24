@@ -10,9 +10,9 @@ export async function Header() {
   const orgs = user ? (await serverApi<{ orgs: { slug: string; name: string }[] }>('/orgs')).data.orgs ?? [] : [];
   return (
     <header className="app-header">
-      <div className="wrap flex h-[76px] items-center gap-4">
+      <div className="wrap flex h-[76px] items-center gap-2 sm:gap-4">
         {/* "/" is the landing page, a separate root layout, so a plain link (full page load) is right here */}
-        <a href="/" className="brand" aria-label="aidev home"><BlocksMark className="brand-mark" />aidev.</a>
+        <a href="/" className="brand" aria-label="aidevkit home"><BlocksMark className="brand-mark" />aidevkit.</a>
         <nav className="ml-auto hidden items-center gap-1 sm:flex">
           <Link href="/explore" className="nav-link">explore</Link>
           <Link href="/search" className="nav-link">browse</Link>
@@ -24,7 +24,7 @@ export async function Header() {
           {user ? <UserMenu user={user} orgs={orgs} /> : (
             <>
               <ButtonLink href="/login" variant="ghost">Log in</ButtonLink>
-              <ButtonLink href="/register">Sign up <span className="font-normal">→</span></ButtonLink>
+              <ButtonLink href="/register">Sign up <span className="hidden font-normal sm:inline">→</span></ButtonLink>
             </>
           )}
         </div>

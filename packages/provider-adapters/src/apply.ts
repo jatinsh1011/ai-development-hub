@@ -52,7 +52,7 @@ function blockRe(op: Extract<PlanOp, { kind: 'text-block' }>) {
 export function applyOp(op: PlanOp, text: string | null, owned: boolean, force: boolean): Res {
   switch (op.kind) {
     case 'write': {
-      if (text !== null && text !== op.content && !owned && !force) return { text, conflict: 'file exists with different content (not installed by aidev, or modified since)' };
+      if (text !== null && text !== op.content && !owned && !force) return { text, conflict: 'file exists with different content (not installed by aidevkit, or modified since)' };
       return { text: op.content };
     }
     case 'json-key': {

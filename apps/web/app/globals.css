@@ -200,6 +200,7 @@ input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); width
     backdrop-filter: blur(14px); box-shadow: var(--shadow-header); }
   .brand { display: inline-flex; align-items: center; gap: 9px; color: var(--fg); text-decoration: none;
     font-family: var(--round); font-weight: 900; font-size: 28px; line-height: 1; letter-spacing: -.07em; }
+  @media (width < 640px) { .app-header .brand { font-size: 24px; } }
   .brand-mark { width: 1.05em; height: 1.05em; flex: none; overflow: visible; }
   .brand-mark .float { transform-box: fill-box; transform-origin: center; transition: transform .45s var(--spring); }
   .brand:hover .brand-mark .float { transform: translate(-2.6px, 3px) rotate(-14deg); }

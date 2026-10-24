@@ -1,6 +1,6 @@
 {
   "name": "aidevkit-cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "description": "Install reusable AI development building blocks (agents, skills, MCP servers, prompts) into Copilot, Claude Code and Codex.",
   "keywords": [
@@ -25,7 +25,8 @@
   "author": "Jatin Sharma",
   "type": "module",
   "bin": {
-    "aidev": "dist/aidev.js"
+    "aidevkit": "dist/aidevkit.js",
+    "aidev": "dist/aidevkit.js"
   },
   "files": [
     "dist",

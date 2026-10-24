@@ -24,7 +24,7 @@ export function scanFiles(files: ArtifactFile[]): Finding[] {
     lines.forEach((text, i) => {
       for (const r of RULES) if (r.re.test(text)) out.push({ severity: r.severity, rule: r.rule, file: f.path, line: i + 1, message: r.message });
     });
-    if (/(^|\/)scripts\//.test(f.path)) out.push({ severity: 'info', rule: 'bundled-script', file: f.path, line: 1, message: 'Bundled script (never executed by aidev)' });
+    if (/(^|\/)scripts\//.test(f.path)) out.push({ severity: 'info', rule: 'bundled-script', file: f.path, line: 1, message: 'Bundled script (never executed by aidevkit)' });
   }
   return out;
 }

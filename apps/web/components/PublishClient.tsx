@@ -73,7 +73,7 @@ export function PublishClient({ me, orgs }: { me: string | null; orgs: Org[] }) 
         {files.length > 0 && <div className="mt-4 font-mono text-xs text-muted">{files.length} files read</div>}
       </label>
       <p className="text-sm text-muted">
-        No directory yet? Run <code className={code}>aidev init artifact skill my-skill</code>, then <code className={code}>aidev publish</code>.
+        No directory yet? Run <code className={code}>aidevkit init artifact skill my-skill</code>, then <code className={code}>aidevkit publish</code>.
       </p>
 
       {report && (

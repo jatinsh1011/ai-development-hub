@@ -15,7 +15,7 @@ export interface InstalledEntry {
   providers: Partial<Record<ProviderId, { ops: PlanOp[]; backupId?: string }>>;
   /** install transaction (rollback point) that produced this entry */
   tx?: string;
-  /** entry as it was before that transaction, restored by `aidev rollback` */
+  /** entry as it was before that transaction, restored by `aidevkit rollback` */
   previous?: Omit<InstalledEntry, 'previous'>;
 }
 export interface State { version: 1; installed: Record<string, InstalledEntry> }

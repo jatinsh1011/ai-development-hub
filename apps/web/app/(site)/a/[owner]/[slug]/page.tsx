@@ -121,7 +121,7 @@ export default async function ArtifactPage({ params, searchParams }: Props) {
                         <li key={i} className="flex items-start gap-3 px-4 py-3 text-sm"><Badge tone={f.severity === 'high' ? 'bad' : 'warn'}>{f.severity}</Badge><div><div>{f.message}</div><div className="font-mono text-xs text-muted">{f.file}:{f.line}</div></div></li>
                       ))}
                     </ul>
-                  ) : <p className="text-sm text-muted">No suspicious patterns found. aidev never executes scripts from an artifact when installing it.</p>}
+                  ) : <p className="text-sm text-muted">No suspicious patterns found. aidevkit never executes scripts from an artifact when installing it.</p>}
                   <p className="mt-3 break-all font-mono text-xs text-muted">sha256 {v.sha256}</p>
                 </div>
               </div>
@@ -142,7 +142,7 @@ export default async function ArtifactPage({ params, searchParams }: Props) {
                 <span className="text-right text-xs text-muted">stars on GitHub<br /><span className="font-mono">{a.githubRepo}</span></span>
               </a>
             )}
-            <div className="flex items-center gap-3"><StarButton refPath={`${owner}/${slug}`} starred={a.starred} stars={a.stars} /><span className="text-xs text-muted">{num(a.installs)} installs via aidev</span></div>
+            <div className="flex items-center gap-3"><StarButton refPath={`${owner}/${slug}`} starred={a.starred} stars={a.stars} /><span className="text-xs text-muted">{num(a.installs)} installs via aidevkit</span></div>
             <Side title="Compatible with"><Compat compat={m.compatibility} /></Side>
             {deps.length > 0 && (
               <Side title="Requires">

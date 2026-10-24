@@ -6,7 +6,7 @@ Artifacts are **untrusted input**. A package can contain malicious scripts, MCP 
 
 | Threat | Control |
 |---|---|
-| Auto-executed code | `aidev` never executes anything from an artifact. Scripts are copied as inert files. |
+| Auto-executed code | `aidevkit` never executes anything from an artifact. Scripts are copied as inert files. |
 | Hidden capabilities | Manifest permissions + derived risk profile (filesystem, network, env vars, **local command execution**, external APIs) shown before install, on the web page, and in `--json`. |
 | Malicious content | Static scan at publish and again locally at install: pipe-to-shell, destructive `rm`, encoded execution, credential-path access, env exfiltration, `sudo`, `chmod 777`, prompt-injection phrases, hidden/bidi Unicode. High-severity findings block public publishing and require `--allow-risky` to install. |
 | Tampering | sha256 over the canonical file set; the CLI re-hashes after download; the lockfile pins hashes and refuses drift. |

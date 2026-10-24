@@ -1,5 +1,5 @@
 /* ==========================================================================
-   aidev landing page. Warm, rounded "enjoy" look: tokens, base, kit components
+   aidevkit landing page. Warm, rounded "enjoy" look: tokens, base, kit components
    and the page composition (hero, install demo, tool cards, hub band, FAQ).
    Only the landing root layout loads this file, so it can style :root and
    elements directly without touching the rest of the site.

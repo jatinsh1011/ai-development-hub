@@ -45,7 +45,7 @@ export async function selectProviders(env: Env, flags: Pick<InstallFlags, 'provi
     const picked = await env.prompt.choose('Install for which tools?', names, names);
     return found.filter((id) => picked.includes(adapters[id].name));
   }
-  throw new CliError(Exit.USAGE, 'ambiguous-provider', `multiple AI tools detected (${found.join(', ')})`, 'pass --provider <id> or --all, or run `aidev config set defaultProvider <id>`');
+  throw new CliError(Exit.USAGE, 'ambiguous-provider', `multiple AI tools detected (${found.join(', ')})`, 'pass --provider <id> or --all, or run `aidevkit config set defaultProvider <id>`');
 }
 
 const asArtifact = (n: ResolvedNode): ResolvedArtifact => ({ owner: n.owner, slug: n.slug, version: n.version, sha256: n.sha256, manifest: n.manifest, files: n.files });
@@ -100,11 +100,11 @@ export async function installNodes(env: Env, order: ResolvedNode[], providers: P
     for (const f of findings) out.warn(`${f.ref}: ${f.file}:${f.line} [${f.severity}] ${f.message}`);
   }
   const high = findings.some((f) => f.severity === 'high');
-  if (high && !flags.allowRisky) throw new CliError(Exit.CONSENT, 'risky', 'artifact contains high-severity findings', 'review them with `aidev info`, then re-run with --allow-risky if you trust the publisher');
+  if (high && !flags.allowRisky) throw new CliError(Exit.CONSENT, 'risky', 'artifact contains high-severity findings', 'review them with `aidevkit info`, then re-run with --allow-risky if you trust the publisher');
   if (!flags.dryRun) {
     out.line();
     if (!flags.yes) {
-      if (!env.prompt.interactive) throw new CliError(Exit.CONSENT, 'consent-required', 'installation needs your consent to the permissions above', 're-run with --yes after reviewing `aidev info <artifact>`');
+      if (!env.prompt.interactive) throw new CliError(Exit.CONSENT, 'consent-required', 'installation needs your consent to the permissions above', 're-run with --yes after reviewing `aidevkit info <artifact>`');
       if (!(await env.prompt.confirm(`Install ${refOf(rootNode)}@${rootNode.version} for ${providers.map((p) => adapters[p].name).join(', ')}?`, false))) throw new CliError(Exit.CONSENT, 'declined', 'installation cancelled');
     }
   }
@@ -198,7 +198,7 @@ export async function installNodes(env: Env, order: ResolvedNode[], providers: P
     if (!results.get(`${refOf(n)}|${p}`)!.skipped) env.client.recordInstall(refOf(n), n.version, p, action).catch(() => {});
   }
   out.line();
-  if (backups.length) out.ok(`${overwrote ? 'Backup created' : 'Rollback point created'}  ${txId}  (undo with \`aidev rollback ${txId}\`)`);
+  if (backups.length) out.ok(`${overwrote ? 'Backup created' : 'Rollback point created'}  ${txId}  (undo with \`aidevkit rollback ${txId}\`)`);
   out.ok('Configuration updated');
   out.line();
   out.line(out.c('bold', 'Ready to use.'));
@@ -248,7 +248,7 @@ export async function uninstallRef(env: Env, refInput: string, flags: { scope: S
   const root = scopeRoot(flags.scope, env.cwd, env.home);
   const state = await loadState(root);
   const entry = findInstalled(state, refInput);
-  if (!entry) throw new CliError(Exit.NOT_FOUND, 'not-installed', `${refInput} is not installed (${flags.scope} scope)`, 'see `aidev list`');
+  if (!entry) throw new CliError(Exit.NOT_FOUND, 'not-installed', `${refInput} is not installed (${flags.scope} scope)`, 'see `aidevkit list`');
   const dependents = Object.values(state.installed).filter((e) => e.ref !== entry.ref && e.dependsOn.includes(entry.ref));
   if (dependents.length && !flags.force) throw new CliError(Exit.CONFLICT, 'has-dependents', `${entry.ref} is required by ${dependents.map((d) => d.ref).join(', ')}`, 'uninstall those first, or use --force');
 
@@ -306,7 +306,7 @@ export async function updateRefs(env: Env, refs: string[] | 'all', flags: Instal
     const named = refs !== 'all';
     if (u.major && !(flags.major || (named && flags.yes))) {
       rows.push({ ref: u.ref, installed: u.installed, latest: u.latest, major: true, updateAvailable: true, status: 'skipped-major' });
-      env.out.warn(`${u.ref}: ${u.installed} → ${u.latest} is a major update; run \`aidev update ${u.ref} --yes\` to apply`);
+      env.out.warn(`${u.ref}: ${u.installed} → ${u.latest} is a major update; run \`aidevkit update ${u.ref} --yes\` to apply`);
       continue;
     }
     if (flags.check) { rows.push({ ref: u.ref, installed: u.installed, latest: u.latest, major: u.major, updateAvailable: true, status: 'available' }); continue; }

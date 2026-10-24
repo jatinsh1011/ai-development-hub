@@ -264,7 +264,7 @@ export function mapAgenticWorkflow(src: Source, sourceId: string, rel: string, t
     name: slug, type: 'workflow', title, description, ...common(src, sourceId, rel, lic), tags: tagsFor('workflow', slug, ['agentic-workflow', 'github']),
     languages, frameworks, permissions: ['read-files', 'network'],
   };
-  const how = `Upstream this is a GitHub Agentic Workflow that runs on: ${triggerOf(data.on)}. aidev installs its instructions so your coding agent can run it on demand. To run it automatically in GitHub Actions, use the [original file](${link(src, rel)}) with \`gh aw\`.\n`;
+  const how = `Upstream this is a GitHub Agentic Workflow that runs on: ${triggerOf(data.on)}. aidevkit installs its instructions so your coding agent can run it on demand. To run it automatically in GitHub Actions, use the [original file](${link(src, rel)}) with \`gh aw\`.\n`;
   return { slug, kind: 'workflow', files: files(manifest, `# ${title}\n\n${notice(src, 'workflow', rel, lic)}${description}\n\n${how}`, lic, [{ path: 'workflow.md', content: body.trim() + '\n' }]) };
 }
 
@@ -464,6 +464,6 @@ export function mapPlugin(src: Source, sourceId: string, root: string, pj: any, 
     pluginFiles.some((f) => /^\.lsp\.json$/.test(rel(f))) ? 'language-server config' : '',
   ].filter(Boolean);
   const list = (label: string, refs: string[]) => (refs.length ? `- ${refs.length} ${refs.length === 1 ? label : `${label}s`}: ${refs.map((r) => `\`${r}\``).join(', ')}\n` : '');
-  const readme = `# ${title}\n\n${notice(src, 'plugin', root, lic)}${description}\n\nInstalling this plugin installs:\n\n${list('agent', dependencies.agents)}${list('skill', dependencies.skills)}${list('prompt', dependencies.prompts)}${list('instruction', dependencies.instructions)}${leftOut.length ? `\nNot included: the plugin's ${leftOut.join(' and ')}, which aidev can't translate across tools yet.\n` : ''}`;
+  const readme = `# ${title}\n\n${notice(src, 'plugin', root, lic)}${description}\n\nInstalling this plugin installs:\n\n${list('agent', dependencies.agents)}${list('skill', dependencies.skills)}${list('prompt', dependencies.prompts)}${list('instruction', dependencies.instructions)}${leftOut.length ? `\nNot included: the plugin's ${leftOut.join(' and ')}, which aidevkit can't translate across tools yet.\n` : ''}`;
   return { slug, kind: 'plugin', version: manifest.version, files: files(manifest, readme, lic, []) };
 }

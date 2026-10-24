@@ -185,7 +185,7 @@ export function InstallDemo() {
   return (
     <div className="demo" ref={root} data-paused={paused ? '' : undefined} data-typing={frame.typing ? '' : undefined}>
       <p className="sr-only">
-        Demo: aidev installs an MCP server, a skill and an agent into {toolName}, writing each one to the folder that tool reads, then rolls the last install back. Click the terminal to type your own aidev command.
+        Demo: aidevkit installs an MCP server, a skill and an agent into {toolName}, writing each one to the folder that tool reads, then rolls the last install back. Click the terminal to type your own aidevkit command.
       </p>
       <div className="demo-window">
         <div className="demo-bar">
@@ -261,7 +261,7 @@ export function InstallDemo() {
                 <input
                   ref={input}
                   className="demo-input"
-                  aria-label="Type an aidev command, then press Enter"
+                  aria-label="Type an aidevkit command, then press Enter"
                   autoComplete="off" autoCapitalize="off" autoCorrect="off" spellCheck={false} enterKeyHint="go"
                   value={draft}
                   onFocus={enterTypingMode}
@@ -290,7 +290,7 @@ export function InstallDemo() {
       <div className="coach" aria-hidden>
         <div className="coach-text" key={typingMode ? 'you' : `${scene}-${tool}`}>
           <h3>{typingMode ? 'your turn.' : sc.coach.title}</h3>
-          <p>{typingMode ? 'Try aidev search postgres, aidev install <name>, aidev list or aidev rollback.' : sc.coach.body.replace('{tool}', toolName)}</p>
+          <p>{typingMode ? 'Try aidevkit search postgres, aidevkit install <name>, aidevkit list or aidevkit rollback.' : sc.coach.body.replace('{tool}', toolName)}</p>
         </div>
         <div className="coach-foot">
           <span className="coach-step">{typingMode ? 'you’re driving' : `step ${scene + 1} of ${SCENES.length}`}</span>
@@ -333,7 +333,7 @@ export function InstallDemo() {
             </li>
           ))}
         </ol>
-        <p className="demo-try">or click the terminal and type <kbd>aidev search postgres</kbd></p>
+        <p className="demo-try">or click the terminal and type <kbd>aidevkit search postgres</kbd></p>
       </div>
     </div>
   );

@@ -2,11 +2,11 @@
 
 **Reusable AI development building blocks** — a registry, discovery site, install CLI and (eventually) enterprise control plane for agents, skills, MCP servers, prompts, instructions and plugins.
 
-Live at **[aidevkit.in](https://aidevkit.in)**. The CLI is [`aidevkit-cli`](https://www.npmjs.com/package/aidevkit-cli) on npm; the command is `aidev`.
+Live at **[aidevkit.in](https://aidevkit.in)**. The CLI is [`aidevkit-cli`](https://www.npmjs.com/package/aidevkit-cli) on npm and installs the `aidevkit` command.
 
 ```
 $ npm i -g aidevkit-cli
-$ aidev install github-mcp-server
+$ aidevkit install github-mcp-server
 
 Resolving github-mcp-server...
 ✓ Target: GitHub Copilot
@@ -24,7 +24,7 @@ mcp-registry/github-mcp-server@2.0.3  (mcp)
     + .vscode/mcp.json
     note: VS Code will prompt for secret inputs the first time the server starts.
 
-✓ Rollback point created  (undo with `aidev rollback <id>`)
+✓ Rollback point created  (undo with `aidevkit rollback <id>`)
 ✓ Configuration updated
 
 Ready to use.
@@ -69,13 +69,13 @@ All listings are real and imported, never invented. Install counts and stars sta
 
 Curation rules for MCP servers (from about 38.7k registry entries to about 21k listings): there must be a repository or website link, placeholder names (test/example/template) are dropped, there are at most 3 servers per publisher namespace (bulk publishers flood the registry otherwise), and only entries whose connection can be expressed faithfully are kept. Templated URLs, required headers and user-supplied arguments are skipped, never guessed. Anything failing the security scan is rejected (e.g. 13 awesome-copilot skills containing `curl | bash`, broad `rm -rf` or credential paths). Imported listings are labelled **not reviewed** on their pages.
 
-Collections are imported only when their content is permissively licensed (MIT, Apache-2.0, BSD, ISC, CC0). The license that applies to an item is the nearest `LICENSE` file above it, so a plugin with its own source-available terms inside an Apache-2.0 repository is skipped. Identical copies of an agent shared by several plugins become one listing, and plugins depend on the listings of their parts. Hooks, LSP and Copilot-extension-only plugins are skipped because aidev can't install them across tools.
+Collections are imported only when their content is permissively licensed (MIT, Apache-2.0, BSD, ISC, CC0). The license that applies to an item is the nearest `LICENSE` file above it, so a plugin with its own source-available terms inside an Apache-2.0 repository is skipped. Identical copies of an agent shared by several plugins become one listing, and plugins depend on the listings of their parts. Hooks, LSP and Copilot-extension-only plugins are skipped because aidevkit can't install them across tools.
 
 Re-run `npm run import` any time; it is idempotent (unchanged listings are skipped; changed upstream content becomes a new version). Options: `npm run import -- mcp|awesome-copilot|collections [--limit N] [--per-namespace N] [--source <collection id>] [--sources-dir <dir of owner_repo checkouts>]`.
 
 The fictional demo catalog (Acme company, demo users) still exists for tests and screenshots only: `npm run demo -w @aidev/api` on an empty database.
 
-Point the CLI at a registry with `aidev config set registry <url>` or `AIDEV_REGISTRY`. For a production-shaped stack: `docker compose up` (Postgres + API + web; see *Status* below).
+Point the CLI at a registry with `aidevkit config set registry <url>` or `AIDEV_REGISTRY`. For a production-shaped stack: `docker compose up` (Postgres + API + web; see *Status* below).
 
 ## Production
 
@@ -96,7 +96,7 @@ docker compose -f docker-compose.prod.yml run --rm api npx tsx src/import/run.ts
 apps/
   api/                 NestJS registry API (auth, artifacts, orgs, policies, events)
   web/                 Next.js + Tailwind site (discovery, artifact pages, publish, company hub)
-  cli/                 `aidev` — bundled to a single self-contained npm package
+  cli/                 `aidevkit` — bundled to a single self-contained npm package
 packages/
   artifact-schema/     manifest (zod), semver, validation, security scanner, risk profile, content hashing
   provider-adapters/   Copilot / Claude Code / Codex adapters + the plan/apply/backup/rollback engine
@@ -113,7 +113,7 @@ docs/                  architecture, providers, security, monitoring, roadmap
 npm run check      # eslint + tsc (all workspaces) + vitest (72 tests)
 ```
 
-Notable tests: `apps/cli/src/agent-workflow.e2e.test.ts` drives the **built `aidev` binary** against a live registry seeded with the test fixtures exactly as a coding agent would (`search --json` → `info --json` → `install --yes --json`), and checks exit codes, conflict refusal, backup/rollback, updates (major versions are never applied silently), lockfile restore, policy blocking and doctor.
+Notable tests: `apps/cli/src/agent-workflow.e2e.test.ts` drives the **built `aidevkit` binary** against a live registry seeded with the test fixtures exactly as a coding agent would (`search --json` → `info --json` → `install --yes --json`), and checks exit codes, conflict refusal, backup/rollback, updates (major versions are never applied silently), lockfile restore, policy blocking and doctor.
 
 ## Docs
 

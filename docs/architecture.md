@@ -2,11 +2,11 @@
 
 ```
 apps/web (Next.js) ─┐
-apps/cli (aidev)  ──┼─►  apps/api (NestJS) ──► Postgres (FTS)     metadata, orgs, policies, events
+apps/cli (aidevkit)  ──┼─►  apps/api (NestJS) ──► Postgres (FTS)     metadata, orgs, policies, events
 AI coding agents ───┘          │            └─► Object storage     immutable version bundles
                                └─► usage events (artifact_*, request, mcp_call, …)
 
-aidev ► cli-engine ► provider-adapters/{copilot,claude,codex} ► project files + .aidev/{state,backups}
+aidevkit ► cli-engine ► provider-adapters/{copilot,claude,codex} ► project files + .aidev/{state,backups}
 ```
 
 ## Key decisions

@@ -10,7 +10,7 @@ export async function doctor(env: Env, scope: 'project' | 'user' = 'project'): P
   const add = (name: string, status: Check['status'], detail: string) => checks.push({ name, status, detail });
   add('node', Number(process.versions.node.split('.')[0]) >= 20 ? 'ok' : 'fail', `v${process.versions.node}`);
   try { await env.client.request('GET', '/health'); add('registry', 'ok', env.cfg.registry); } catch (e: any) { add('registry', 'fail', `${env.cfg.registry} — ${e.message}`); }
-  if (!env.client.hasToken) add('auth', 'warn', 'not logged in (public artifacts only) — run `aidev login`');
+  if (!env.client.hasToken) add('auth', 'warn', 'not logged in (public artifacts only) — run `aidevkit login`');
   else { try { const me = await env.client.me(); add('auth', 'ok', `${me.user.handle} <${me.user.email}>`); } catch (e: any) { add('auth', 'fail', e.message); } }
   for (const d of await detectProviders(env)) add(`provider:${d.adapter.id}`, d.env.detected ? 'ok' : 'warn', d.env.detected ? d.env.evidence.join(', ') : 'not detected');
 
@@ -32,7 +32,7 @@ export async function doctor(env: Env, scope: 'project' | 'user' = 'project'): P
     if (!lock && Object.keys(state.installed).length) add('lockfile', 'warn', 'no .aidev-lock.json — commit one for reproducible setups');
     else if (lock) {
       const drift = Object.entries(lock.artifacts).filter(([r, a]) => state.installed[r]?.version !== a.version);
-      add('lockfile', drift.length ? 'warn' : 'ok', drift.length ? `out of sync: ${drift.map(([r]) => r).join(', ')} (run \`aidev install\`)` : 'in sync');
+      add('lockfile', drift.length ? 'warn' : 'ok', drift.length ? `out of sync: ${drift.map(([r]) => r).join(', ')} (run \`aidevkit install\`)` : 'in sync');
     }
   }
   void adapters;

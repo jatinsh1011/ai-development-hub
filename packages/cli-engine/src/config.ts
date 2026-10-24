@@ -3,7 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 
 export interface Config { registry: string; token?: string; defaultProvider?: string; email?: string }
-/** The public registry. For a local API, set AIDEV_REGISTRY=http://localhost:4000 or `aidev config set registry`. */
+/** The public registry. For a local API, set AIDEV_REGISTRY=http://localhost:4000 or `aidevkit config set registry`. */
 export const DEFAULT_REGISTRY = 'https://aidevkit.in';
 
 export const configDir = () => process.env.AIDEV_CONFIG_DIR ?? path.join(os.homedir(), '.config', 'aidev');

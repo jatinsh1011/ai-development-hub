@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup';
-// Bundle the private workspace packages so the published `aidev` package is self-contained.
+// Bundle the private workspace packages so the published `aidevkit-cli` package is self-contained.
 export default defineConfig({
-  entry: { aidev: 'src/main.ts' },
+  entry: { aidevkit: 'src/main.ts' },
   format: ['esm'],
   target: 'node20',
   clean: true,

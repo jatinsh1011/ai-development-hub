@@ -78,7 +78,7 @@ export default async function Home() {
           </div>
           <pre className="terminal-block">
 {`$ npm i -g aidevkit-cli
-$ aidev install github-mcp-server
+$ aidevkit install github-mcp-server
 
 Resolving github-mcp-server...
 ✓ Target: GitHub Copilot
@@ -96,7 +96,7 @@ mcp-registry/github-mcp-server@2.0.3  (mcp)
     + .vscode/mcp.json
     note: VS Code will prompt for secret inputs the first time the server starts.
 
-✓ Rollback point created  (undo with \`aidev rollback <id>\`)
+✓ Rollback point created  (undo with \`aidevkit rollback <id>\`)
 ✓ Configuration updated
 
 Ready to use.`}
