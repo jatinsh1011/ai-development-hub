@@ -34,7 +34,7 @@ const TOOL_PATHS = [
 ] as const;
 
 const HUB = [
-  { tone: 'h-blue', n: '21,000+', label: 'MCP servers', text: 'GitHub, Stripe, Atlassian, databases, clouds and more.', type: 'mcp' },
+  { tone: 'h-blue', n: '28,000+', label: 'MCP servers', text: 'GitHub, Stripe, Atlassian, databases, clouds and more.', type: 'mcp' },
   { tone: 'h-peach', n: '850+', label: 'skills', text: 'SKILL.md packages that teach an agent a repeatable task.', type: 'skill' },
   { tone: 'h-pink', n: '550+', label: 'agents', text: 'Specialised assistants with their own instructions and tools.', type: 'agent' },
   { tone: 'h-sky', n: '440+', label: 'instructions', text: 'Project rules your AI tool follows on every request.', type: 'instruction' },
@@ -119,7 +119,7 @@ export default function Landing() {
                 <span className="chip chip-peach">Claude Code</span>
                 <span className="chip chip-night">Codex</span>
                 <span className="chip chip-rose">your coding agent</span>
-                <a className="more" href="/search">+ 23,000 listings ↗</a>
+                <a className="more" href="/search">+ 30,000 listings ↗</a>
               </div>
             </div>
             <div className="cta-pair">
@@ -277,7 +277,7 @@ export default function Landing() {
         <section className="band" aria-labelledby="hub-title">
           <div className="wrap">
             <div className="hub-head">
-              <h2 id="hub-title" className="title">23,000+ building blocks.<br /><span className="accent-pink">all of them real.</span></h2>
+              <h2 id="hub-title" className="title">30,000+ building blocks.<br /><span className="accent-pink">all of them real.</span></h2>
               <p className="lede">Imported from the official MCP Registry, awesome-copilot and ten other openly licensed collections, each with a link to its source. Install counts start at zero and only count real installs.</p>
             </div>
             <div className="hub-grid">
