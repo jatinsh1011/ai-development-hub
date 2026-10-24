@@ -3,10 +3,38 @@
   "version": "0.1.0",
   "license": "MIT",
   "description": "Install reusable AI development building blocks (agents, skills, MCP servers, prompts) into Copilot, Claude Code and Codex.",
+  "keywords": [
+    "ai",
+    "agents",
+    "skills",
+    "mcp",
+    "mcp-server",
+    "claude-code",
+    "github-copilot",
+    "codex",
+    "cli",
+    "package-manager"
+  ],
+  "homepage": "https://aidevkit.in",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jatinsh1011/ai-development-hub.git",
+    "directory": "apps/cli"
+  },
+  "bugs": "https://github.com/jatinsh1011/ai-development-hub/issues",
+  "author": "Jatin Sharma",
   "type": "module",
-  "bin": { "aidev": "dist/aidev.js" },
-  "files": ["dist"],
-  "engines": { "node": ">=20" },
+  "bin": {
+    "aidev": "dist/aidev.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "tsx src/main.ts",
     "build": "tsup",
