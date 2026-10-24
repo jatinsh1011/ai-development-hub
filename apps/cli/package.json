@@ -1,6 +1,7 @@
 {
   "name": "aidev",
   "version": "0.1.0",
+  "license": "MIT",
   "description": "Install reusable AI development building blocks (agents, skills, MCP servers, prompts) into Copilot, Claude Code and Codex.",
   "type": "module",
   "bin": { "aidev": "dist/aidev.js" },

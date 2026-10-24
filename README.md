@@ -34,7 +34,7 @@ npm run dev:api            # http://localhost:4000
 npm run dev:web            # http://localhost:3000
 
 npm run build:cli          # builds apps/cli/dist/aidev.js
-node apps/cli/dist/aidev.js search "react migration"
+AIDEV_REGISTRY=http://localhost:4000 node apps/cli/dist/aidev.js search "react migration"   # the CLI defaults to https://aidevkit.in
 ```
 
 Create an account on the site (or `POST /v1/auth/register`). There are no built-in users any more.
@@ -67,6 +67,19 @@ Re-run `npm run import` any time; it is idempotent (unchanged listings are skipp
 The fictional demo catalog (Acme company, demo users) still exists for tests and screenshots only: `npm run demo -w @aidev/api` on an empty database.
 
 Point the CLI at a registry with `aidev config set registry <url>` or `AIDEV_REGISTRY`. For a production-shaped stack: `docker compose up` (Postgres + API + web; see *Status* below).
+
+## Production
+
+The public site and registry run at **https://aidevkit.in** on one VPS, behind a shared Caddy:
+`docker-compose.prod.yml` runs Postgres, the API and the web app on the external `proxy` network (no published ports), and
+Caddy sends `/v1/*` to `aidev-api:4000` and everything else to `aidev-web:3000`, so the site and the CLI use the same origin.
+
+```bash
+cp .env.example .env    # then set POSTGRES_PASSWORD (hex, no URL-special characters) and SITE_URL=https://aidevkit.in
+docker compose -f docker-compose.prod.yml up -d --build
+# refresh listings (idempotent; safe while the API runs):
+docker compose -f docker-compose.prod.yml run --rm api npx tsx src/import/run.ts all
+```
 
 ## Repository layout
 

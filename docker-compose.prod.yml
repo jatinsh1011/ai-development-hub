@@ -1,0 +1,48 @@
+# Production (the VPS): Postgres + API + web behind the shared Caddy.
+# Nothing is published to the host. Caddy joins the external "proxy" network and routes
+#   https://aidevkit.in/v1/*  -> aidev-api:4000   (the site's browser calls and the CLI)
+#   everything else           -> aidev-web:3000
+# so the site calls the API on its own origin (NEXT_PUBLIC_API_URL is empty).
+#
+#   docker network create proxy            # once per host (already exists on the VPS)
+#   cp .env.example .env                   # set POSTGRES_PASSWORD and SITE_URL
+#   docker compose -f docker-compose.prod.yml up -d --build
+services:
+  db:
+    image: postgres:17
+    container_name: aidev-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: aidev
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: aidev
+    volumes: [dbdata:/var/lib/postgresql/data]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U aidev"], interval: 5s, retries: 20 }
+  api:
+    build: { context: ., dockerfile: apps/api/Dockerfile }
+    container_name: aidev-api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://aidev:${POSTGRES_PASSWORD}@db:5432/aidev
+      AIDEV_STORAGE_DIR: /data/storage
+      PORT: 4000
+    volumes: [artifacts:/data/storage]
+    depends_on: { db: { condition: service_healthy } }
+    expose: ["4000"]
+    networks: [default, proxy]
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ""
+        NEXT_PUBLIC_SITE_URL: ${SITE_URL:?set SITE_URL in .env}
+    container_name: aidev-web
+    restart: unless-stopped
+    environment: { API_URL: http://aidev-api:4000 }   # container name: unique on the shared proxy network
+    depends_on: [api]
+    expose: ["3000"]
+    networks: [default, proxy]
+networks:
+  proxy: { external: true }
+volumes: { dbdata: {}, artifacts: {} }
