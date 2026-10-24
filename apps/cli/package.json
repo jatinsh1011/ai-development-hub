@@ -1,6 +1,6 @@
 {
   "name": "aidevkit-cli",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
   "description": "Install reusable AI development building blocks (agents, skills, MCP servers, prompts) into Copilot, Claude Code and Codex.",
   "keywords": [

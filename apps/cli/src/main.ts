@@ -1,4 +1,5 @@
 import { promises as fs } from 'node:fs';
+import { createRequire } from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
 import { Command } from 'commander';
@@ -10,7 +11,8 @@ import {
 } from '@aidev/cli-engine';
 import { listBackups } from '@aidev/provider-adapters';
 
-const VERSION = '0.1.0';
+/** Read at runtime so `--version` always matches the published package (dist/ and src/ both sit one level below it). */
+const VERSION: string = createRequire(import.meta.url)('../package.json').version;
 
 class YesTty extends TtyPrompter { async confirm() { return true; } }
 
