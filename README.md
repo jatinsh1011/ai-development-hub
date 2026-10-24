@@ -2,20 +2,29 @@
 
 **Reusable AI development building blocks** — a registry, discovery site, install CLI and (eventually) enterprise control plane for agents, skills, MCP servers, prompts, instructions and plugins.
 
-```bash
-aidev search "react migration"
-aidev install react-migration-agent
-```
+Live at **[aidevkit.in](https://aidevkit.in)**. The CLI is [`aidevkit-cli`](https://www.npmjs.com/package/aidevkit-cli) on npm; the command is `aidev`.
 
 ```
-✓ Artifact resolved  aidev/react-migration-agent@1.4.2
-✓ Dependencies resolved (3): react-19-migration@1.3.0, rtl-migration@1.0.0, github@1.2.0
+$ npm i -g aidevkit-cli
+$ aidev install github-mcp-server
+
+Resolving github-mcp-server...
 ✓ Target: GitHub Copilot
+✓ Artifact resolved  mcp-registry/github-mcp-server@2.0.3
 
-GitHub Copilot:
-  + .github/agents/react-migration-agent.agent.md
-  + .vscode/mcp.json
-✓ Rollback point created
+Requested permissions:
+  mcp-registry/github-mcp-server
+    - Network access: Makes outbound network requests; Connects to https://api.githubcopilot.com/mcp/
+    - External APIs: Sends tool calls and their arguments to the server
+
+Install mcp-registry/github-mcp-server@2.0.3 for GitHub Copilot? (y/N) y
+
+mcp-registry/github-mcp-server@2.0.3  (mcp)
+  GitHub Copilot:
+    + .vscode/mcp.json
+    note: VS Code will prompt for secret inputs the first time the server starts.
+
+✓ Rollback point created  (undo with `aidev rollback <id>`)
 ✓ Configuration updated
 
 Ready to use.

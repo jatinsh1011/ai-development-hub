@@ -13,7 +13,7 @@
     "dev:api": "npm run dev -w @aidev/api",
     "import": "npm run import -w @aidev/api --",
     "dev:web": "npm run dev -w @aidev/web",
-    "build:cli": "npm run build -w aidev",
+    "build:cli": "npm run build -w aidevkit-cli",
     "lint": "eslint .",
     "check": "npm run lint && npm run typecheck && npm test"
   },

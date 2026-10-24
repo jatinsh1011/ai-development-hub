@@ -1,11 +1,11 @@
-# aidev
+# aidev (`aidevkit-cli`)
 
 Install AI agents, skills, MCP servers, prompts, instructions, workflows and plugins into **GitHub Copilot, Claude Code and Codex** with one command. aidev writes each one where your tool reads it, shows what it can access before anything is written, and can undo any install.
 
 Browse the catalog (30,000+ listings) at **[aidevkit.in](https://aidevkit.in)**.
 
 ```bash
-npm i -g aidev
+npm i -g aidevkit-cli     # installs the `aidev` command
 
 aidev search "react migration"
 aidev info github-mcp-server

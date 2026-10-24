@@ -12,10 +12,10 @@ export default function Docs() {
 
       <div className="prose-hub mt-12" style={{ maxWidth: 'none' }}>
         <h2>Install</h2>
-        <Code>{`npm install -g aidev
-aidev login
-aidev search "react migration"
-aidev install react-migration-agent`}</Code>
+        <Code>{`npm install -g aidevkit-cli      # the command is aidev
+aidev search "playwright"
+aidev info playwright-tester
+aidev install playwright-tester`}</Code>
 
         <h2>Where files go</h2>
         <p>Each provider adapter translates one neutral artifact into that tool’s current format. Nothing is overwritten silently: conflicts abort, <code>--force</code> backs up first, and every install is a rollback point.</p>
@@ -32,9 +32,9 @@ aidev install react-migration-agent`}</Code>
 
         <h2>For coding agents</h2>
         <p>Every command supports <code>--json</code> (a single JSON document on stdout), <code>--yes</code> (non-interactive consent) and <code>--no-color</code>. Authenticate with <code>AIDEV_TOKEN</code>.</p>
-        <Code>{`aidev search "react 19 migration" --json
-aidev info react-19-migration --json
-aidev install react-19-migration --yes --json --provider copilot`}</Code>
+        <Code>{`aidev search "react 19" --json
+aidev info react19-migrator --json
+aidev install react19-migrator --yes --json --provider copilot`}</Code>
         <table>
           <thead><tr><th>Exit</th><th>Meaning</th></tr></thead>
           <tbody>

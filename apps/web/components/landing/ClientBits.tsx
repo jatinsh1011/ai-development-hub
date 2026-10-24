@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 
 /** Copies the install command; the button itself shows the command, like a terminal line. */
-export function CopyInstall({ command = 'npm i -g aidev', className = 'btn btn-copy' }: { command?: string; className?: string }) {
+export function CopyInstall({ command = 'npm i -g aidevkit-cli', className = 'btn btn-copy' }: { command?: string; className?: string }) {
   const [copied, setCopied] = useState(false);
   useEffect(() => {
     if (!copied) return;

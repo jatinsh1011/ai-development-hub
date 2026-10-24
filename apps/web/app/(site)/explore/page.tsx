@@ -77,19 +77,26 @@ export default async function Home() {
             </div>
           </div>
           <pre className="terminal-block">
-{`$ aidev search "react migration"
-$ aidev install react-migration-agent
+{`$ npm i -g aidevkit-cli
+$ aidev install github-mcp-server
 
-✓ Artifact resolved  aidev/react-migration-agent@1.4.2
-✓ Dependencies resolved (3)
+Resolving github-mcp-server...
 ✓ Target: GitHub Copilot
+✓ Artifact resolved  mcp-registry/github-mcp-server@2.0.3
 
-GitHub Copilot:
-  + .github/skills/react-19-migration/SKILL.md
-  + .github/agents/react-migration-agent.agent.md
-  + .vscode/mcp.json
+Requested permissions:
+  mcp-registry/github-mcp-server
+    - Network access: Makes outbound network requests; Connects to https://api.githubcopilot.com/mcp/
+    - External APIs: Sends tool calls and their arguments to the server
 
-✓ Rollback point created
+Install mcp-registry/github-mcp-server@2.0.3 for GitHub Copilot? (y/N) y
+
+mcp-registry/github-mcp-server@2.0.3  (mcp)
+  GitHub Copilot:
+    + .vscode/mcp.json
+    note: VS Code will prompt for secret inputs the first time the server starts.
+
+✓ Rollback point created  (undo with \`aidev rollback <id>\`)
 ✓ Configuration updated
 
 Ready to use.`}

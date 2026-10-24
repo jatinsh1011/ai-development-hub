@@ -340,7 +340,7 @@ export function respond(input: string, ctx: { tool: ToolId; files: string[] }): 
     const f = args[0] && ctx.files.includes(args[0]) ? fileFor(args[0], ctx.tool) : null;
     return { steps: f ? lines(f.text) : [out(`cat: ${args[0] ?? ''}: No such file or directory`, 60)] };
   }
-  if (cmd === 'npm' || cmd === 'npx') return { steps: [out('{dim:aidev is already installed in this demo. In your own terminal: npm i -g aidev}', 80)] };
+  if (cmd === 'npm' || cmd === 'npx') return { steps: [out('{dim:aidev is already installed in this demo. In your own terminal: npm i -g aidevkit-cli}', 80)] };
   if (cmd !== 'aidev') return { steps: [out(`zsh: command not found: ${cmd}`, 60)] };
 
   const sub = args[0];

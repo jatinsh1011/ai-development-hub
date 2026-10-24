@@ -231,18 +231,18 @@ code, kbd, .mono { font-family: var(--mono); font-size: .92em; }
 .btn-quiet { --btn-bg: var(--quiet); --btn-ink: var(--ink); --btn-edge: var(--quiet-edge); }
 .btn-sm { border-radius: var(--r-pill); padding: 12px 20px; font-size: 14px; gap: 10px; }
 .btn .arrow { font-weight: 400; }
-.btn-copy { font-family: var(--mono); font-weight: 600; font-size: 15px; gap: 14px; }
+.btn-copy { font-family: var(--mono); font-weight: 600; font-size: 14px; gap: 12px; padding-inline: 20px; }
 .btn-copy .copy-ico { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
 .btn-copy .dollar { opacity: .6; user-select: none; }
 .band-accent .btn { --btn-bg: #fffdf9; --btn-ink: #2459e8; --btn-edge: #bed0ff; }
 .band-accent .btn-quiet { --btn-bg: #214dc3; --btn-ink: #fffdf9; --btn-edge: #17399a; }
 .band-accent .btn:focus-visible { outline-color: #ffd392; }
 
-.cta-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; width: min(560px, 100%); }
+.cta-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; width: min(600px, 100%); }
 .cta { display: grid; gap: 14px; align-content: start; text-align: center; }
 .cta .note { margin: 0; }
 @media (width <= 600px) { .btn { gap: 10px; padding-inline: 16px; } .cta-pair { gap: 12px; } .btn-copy { font-size: 14px; } }
-@media (width <= 420px) { .cta-pair { grid-template-columns: 1fr; } }
+@media (width <= 640px) { .cta-pair { grid-template-columns: 1fr; } }  /* the install line needs a full row on small screens */
 
 /* ---- 6. Chips, tags, pills ---------------------------------------------- */
 .chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; font-weight: 650; }
